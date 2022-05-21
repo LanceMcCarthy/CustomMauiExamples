@@ -1,0 +1,71 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:local="clr-namespace:FlyoutExample"
+             xmlns:converters="clr-namespace:FlyoutExample.Converters"
+             x:Class="FlyoutExample.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:InvertBoolConverter x:Key="InvertBoolConv"/>
+
+            <Color x:Key="TranslucentWhite">#AAFFFFFF</Color>
+            <Color x:Key="BrandWhite">White</Color>
+            <Color x:Key="BrandBlue">#03446a</Color>
+            <Color x:Key="BrandtGrayLight">#E5E5E1</Color>
+            <Color x:Key="BrandGrayMedium">#969696</Color>
+            <Color x:Key="BrandGrayDark">#505050</Color>
+            <Color x:Key="BrandRedLight">Red</Color>
+            <Color x:Key="BrandRedDark">DarkRed</Color>
+
+            <x:String x:Key="TelerikFontFamilyName">telerikfontexamples</x:String>
+            <x:String x:Key="EditGlyph">&#xe818;</x:String>
+            <x:String x:Key="SaveGlyph">&#xe87b;</x:String>
+            <x:String x:Key="DraftGlyph">&#xe828;</x:String>
+            <x:String x:Key="InfoGlyph">&#xe815;</x:String>
+            <x:String x:Key="CancelGlyph">&#xe80a;</x:String>
+            <x:String x:Key="PlusSquaredGlyph">&#xf0fe;</x:String>
+            <x:String x:Key="MinusSquaredGlyph">&#xf146;</x:String>
+            <x:String x:Key="TrashGlyph">&#xe817;</x:String>
+
+            <Style x:Key="FontIconRadButtonStyle"
+                   TargetType="telerik:RadButton">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource TelerikFontFamilyName}"/>
+            </Style>
+
+            <Style x:Key="FontIconLabelStyle"
+                   TargetType="telerik:RadButton">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource TelerikFontFamilyName}" />
+            </Style>
+
+            <Style x:Key="ListPickerDisplayTemplateLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+                <Setter Property="TextColor"
+                        Value="Black" />
+                <Setter Property="Margin"
+                        Value="5,0,0,0" />
+            </Style>
+
+            <!-- For more info, see https://docs.microsoft.com/en-us/dotnet/maui/user-interface/pages/navigationpage -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="{StaticResource BrandBlue}" />
+                <Setter Property="BarTextColor"
+                        Value="{StaticResource BrandWhite}" />
+                <Setter Property="NavigationPage.HasNavigationBar"
+                        Value="False" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

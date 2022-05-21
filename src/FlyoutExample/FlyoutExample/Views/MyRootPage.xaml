@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+            x:Class="FlyoutExample.Views.MyRootPage"
+            xmlns:views="clr-namespace:FlyoutExample.Views"
+            IsPresented="True" >
+
+    <!-- This is the panel that flies out from the side. You can make it stay open by setting "IsPresented=True"-->
+    <FlyoutPage.Flyout>
+        <views:MenuPage x:Name="MyMenuPage" />
+    </FlyoutPage.Flyout>
+
+    <!-- The 'Detail' page means the main part of the app. -->
+    <FlyoutPage.Detail>
+        <!-- We will use a NavigationPage as the root of the detail area. This will let you navigate to LoginPage/MainPage/HistoryPage/etc  -->
+        <NavigationPage NavigationPage.HasNavigationBar="False">
+            <x:Arguments>
+                <views:DashboardPage />
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>

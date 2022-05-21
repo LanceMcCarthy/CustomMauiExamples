@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="FlyoutExample.Views.RoutesPage"
+             x:Name="ThisPage">
+    <Grid>
+        <telerik:RadDataGrid ItemsSource="{Binding Routes}"
+                             SelectionMode="None"
+                             AutoGenerateColumns="False">
+            <telerik:RadDataGrid.Columns>
+                <telerik:DataGridTemplateColumn HeaderText="Options"
+                                                SizeMode="Fixed"
+                                                Width="120">
+                    <telerik:DataGridTemplateColumn.CellContentTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="5"
+                                                   Spacing="5"
+                                                   VerticalOptions="End"
+                                                   HorizontalOptions="Fill">
+                                <telerik:RadButton Text="{StaticResource EditGlyph}"
+                                                   Style="{StaticResource FontIconRadButtonStyle}"
+                                                   Command="{Binding BindingContext.GoToDetailsCommand, Source={x:Reference ThisPage}}"
+                                                   CommandParameter="{Binding}"
+                                                   TextColor="{StaticResource BrandWhite}"
+                                                   BackgroundColor="{StaticResource BrandGrayDark}" />
+                                <telerik:RadButton Text="{StaticResource TrashGlyph}"
+                                                   Style="{StaticResource FontIconRadButtonStyle}"
+                                                   Command="{Binding BindingContext.DeleteCommand, Source={x:Reference ThisPage}}"
+                                                   CommandParameter="{Binding}"
+                                                   TextColor="{StaticResource BrandWhite}"
+                                                   BackgroundColor="{StaticResource BrandRedDark}" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </telerik:DataGridTemplateColumn.CellContentTemplate>
+                </telerik:DataGridTemplateColumn>
+                <telerik:DataGridTextColumn PropertyName="Name"
+                                            HeaderText="Route Pilot" />
+                <telerik:DataGridTextColumn PropertyName="Position"
+                                            HeaderText="Position" />
+                <telerik:DataGridDateColumn PropertyName="StartDate"
+                                            HeaderText="Start Date"
+                                            CellContentFormat="{}{0:MM/dd/yyyy}" />
+            </telerik:RadDataGrid.Columns>
+        </telerik:RadDataGrid>
+
+        <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}"
+                                  IsVisible="{Binding IsBusy}"
+                                  BackgroundColor="{StaticResource TranslucentWhite}"
+                                  AnimationContentColor="{StaticResource BrandBlue}"
+                                  AnimationContentHeightRequest="150"
+                                  AnimationContentWidthRequest="150"
+                                  AnimationType="Animation6"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             x:Class="FlyoutExample.Views.RouteDetailPage">
+
+    <Grid>
+        <Image Source="route_airlines.png"
+               Aspect="Fill" />
+
+        <VerticalStackLayout Padding="5"
+                             Spacing="5"
+                             Margin="5"
+                             WidthRequest="300"
+                             VerticalOptions="Start"
+                             HorizontalOptions="Start"
+                             BackgroundColor="{StaticResource TranslucentWhite}">
+
+            <!-- *** profile pic header *** -->
+            <telerik:RadBorder BorderColor="{StaticResource BrandBlue}"
+                               BackgroundColor="{StaticResource BrandWhite}"
+                               WidthRequest="290"
+                               BorderThickness="2,1,2,3"
+                               HorizontalOptions="Start">
+                <Grid>
+                    <Image Source="{Binding SelectedPilot.PhotoUrl}" />
+
+                    <VerticalStackLayout VerticalOptions="End"
+                                         HorizontalOptions="Fill"
+                                         Padding="5"
+                                         Spacing="3"
+                                         BackgroundColor="{StaticResource TranslucentWhite}">
+                        <Label Text="{Binding SelectedPilot.Name, Mode=TwoWay}"
+                               TextColor="{StaticResource BrandBlue}"
+                               FontAttributes="Bold" />
+
+                        <Label Text="{Binding SelectedPilot.Position, Mode=TwoWay}"
+                               TextColor="{StaticResource BrandGrayDark}" />
+
+                    </VerticalStackLayout>
+                </Grid>
+            </telerik:RadBorder>
+
+            <!-- *** Form elements panel *** -->
+
+            <telerik:RadListPicker Placeholder="Select Gender"
+                                   ItemsSource="{Binding Genders}"
+                                   SelectedItem="{Binding SelectedPilot.Gender, Mode=TwoWay}">
+                <telerik:RadListPicker.DisplayTemplate>
+                    <ControlTemplate>
+                        <Label Text="{TemplateBinding DisplayString, StringFormat='Gender: {0}'}"
+                               Style="{StaticResource ListPickerDisplayTemplateLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{TemplateBinding ToggleCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ControlTemplate>
+                </telerik:RadListPicker.DisplayTemplate>
+            </telerik:RadListPicker>
+
+            <telerik:RadListPicker Placeholder="Select Ethnicity"
+                                   ItemsSource="{Binding Ethnicities}"
+                                   SelectedItem="{Binding SelectedPilot.Ethnicity, Mode=TwoWay}">
+                <telerik:RadListPicker.DisplayTemplate>
+                    <ControlTemplate>
+                        <Label Text="{TemplateBinding DisplayString, StringFormat='Ethnicity: {0}'}"
+                               Style="{StaticResource ListPickerDisplayTemplateLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{TemplateBinding ToggleCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ControlTemplate>
+                </telerik:RadListPicker.DisplayTemplate>
+            </telerik:RadListPicker>
+
+            <telerik:RadListPicker Placeholder="Select Eye Color"
+                                   ItemsSource="{Binding EyeColors}"
+                                   SelectedItem="{Binding SelectedPilot.EyeColor, Mode=TwoWay}">
+                <telerik:RadListPicker.DisplayTemplate>
+                    <ControlTemplate>
+                        <Label Text="{TemplateBinding DisplayString, StringFormat='Eye Color: {0}'}"
+                               Style="{StaticResource ListPickerDisplayTemplateLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{TemplateBinding ToggleCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ControlTemplate>
+                </telerik:RadListPicker.DisplayTemplate>
+            </telerik:RadListPicker>
+
+            <telerik:RadListPicker Placeholder="Select Hair Color"
+                                   ItemsSource="{Binding HairColors}"
+                                   SelectedItem="{Binding SelectedPilot.HairColor, Mode=TwoWay}">
+                <telerik:RadListPicker.DisplayTemplate>
+                    <ControlTemplate>
+                        <Label Text="{TemplateBinding DisplayString, StringFormat='Hair Color: {0}'}"
+                               Style="{StaticResource ListPickerDisplayTemplateLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{TemplateBinding ToggleCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ControlTemplate>
+                </telerik:RadListPicker.DisplayTemplate>
+            </telerik:RadListPicker>
+
+            <telerik:RadListPicker Placeholder="Select Hair Length"
+                                   ItemsSource="{Binding HairLengths}"
+                                   SelectedItem="{Binding SelectedPilot.HairLength, Mode=TwoWay}">
+                <telerik:RadListPicker.DisplayTemplate>
+                    <ControlTemplate>
+                        <Label Text="{TemplateBinding DisplayString, StringFormat='Hair Length: {0}'}"
+                               Style="{StaticResource ListPickerDisplayTemplateLabelStyle}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{TemplateBinding ToggleCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </ControlTemplate>
+                </telerik:RadListPicker.DisplayTemplate>
+            </telerik:RadListPicker>
+
+            <telerik:RadNumericInput Value="{Binding SelectedPilot.Salary, Mode=TwoWay}"
+                                     StringFormat="{}{0:C2}" />
+
+            <telerik:RadDatePicker Date="{Binding SelectedPilot.StartDate, Mode=TwoWay}" />
+
+            <telerik:RadNumericInput Value="{Binding SelectedPilot.VacationUsed, Mode=TwoWay}"
+                                     StringFormat="{}{0:N0}" />
+
+            <telerik:RadNumericInput Value="{Binding SelectedPilot.VacationTotal, Mode=TwoWay}"
+                                     StringFormat="{}{0:N0}" />
+
+            <HorizontalStackLayout Margin="0,5,0,0"
+                                   Spacing="5"
+                                   HorizontalOptions="End">
+                <telerik:RadButton Text="save"
+                                   BackgroundColor="{StaticResource BrandBlue}"
+                                   TextColor="{StaticResource LightGray}"
+                                   BorderColor="{StaticResource BrandBlue}"
+                                   BorderThickness="1"
+                                   CornerRadius="5" />
+                <telerik:RadButton Text="cancel"
+                                   Command="{Binding GoBackCommand}"
+                                   BackgroundColor="{StaticResource DarkGray}"
+                                   TextColor="{StaticResource LightGray}"
+                                   BorderColor="{StaticResource DarkGray}"
+                                   BorderThickness="1"
+                                   CornerRadius="5" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

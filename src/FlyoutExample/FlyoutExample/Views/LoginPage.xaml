@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="FlyoutExample.Views.LoginPage">
+    <Grid>
+        <VerticalStackLayout Padding="5"
+                             Spacing="5"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+            <telerik:RadEntry x:Name="UsernameEntry"
+                              Text="lance@domain.com" />
+            <telerik:RadEntry x:Name="PasswordEntry"
+                              Text="bad-password" />
+            <telerik:RadButton Text="Login"
+                               Clicked="LoginClicked"
+                               BackgroundColor="{StaticResource BrandBlue}"
+                               TextColor="{StaticResource LightGray}"
+                               BorderColor="{StaticResource BrandBlue}"
+                               BorderThickness="1"
+                               CornerRadius="5" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
