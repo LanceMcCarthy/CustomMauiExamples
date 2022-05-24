@@ -132,6 +132,21 @@ public class RouteDataService
         return pilots;
     }
 
+    public async Task<Pilot> GetPilot(int index)
+    {
+        if (pilots == null)
+            await InitializeAsync();
+
+        if (index <= pilots.Count)
+        {
+            var pilot = pilots[index];
+            Console.WriteLine($"Fetched Pilot: {pilot.Name}");
+            return pilot;
+        }
+
+        throw new IndexOutOfRangeException("the index you are looking for does not exist.");
+    }
+
     public Task AddPilotAsync(Pilot routePilot)
     {
         this.pilots.Add(routePilot);

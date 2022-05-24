@@ -5,24 +5,29 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="FlyoutExample.Views.DashboardPage">
 
-    <Grid>
-        <VerticalStackLayout VerticalOptions="Center"
-                             HorizontalOptions="Center"
-                             Spacing="10">
-            <Label Text="UNDER CONSTRUCTION"
-                   FontAttributes="Bold"
-                   FontSize="24"
-                   HorizontalOptions="Center" />
-            <Label Text="Visit the Routes page for a nice demo."
-                   HorizontalOptions="Center" />
-        </VerticalStackLayout>
+    <Grid RowDefinitions="*,Auto">
+        <telerik:RadTabView x:Name="TabView1"/>
 
-        <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}"
+        <!--<telerik:RadBusyIndicator IsBusy="{Binding IsBusy}"
                                   IsVisible="{Binding IsBusy}"
                                   BackgroundColor="{StaticResource TranslucentWhite}"
                                   AnimationContentColor="{StaticResource BrandBlue}"
                                   AnimationContentHeightRequest="150"
                                   AnimationContentWidthRequest="150"
-                                  AnimationType="Animation6" />
+                                  AnimationType="Animation6" />-->
+
+        <HorizontalStackLayout Grid.Row="1" 
+                               HorizontalOptions="Center"
+                               Padding="5"
+                               Spacing="5">
+            <Button Text="Add Tab"
+                    BackgroundColor="{StaticResource BrandBlue}"
+                    TextColor="{StaticResource BrandWhite}"
+                    Clicked="AddTabButton_Clicked"/>
+            <Button Text="Remove First Tab"
+                    BackgroundColor="Grey"
+                    TextColor="{StaticResource BrandWhite}"
+                    Clicked="RemoveTabButton_Clicked"/>
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>
