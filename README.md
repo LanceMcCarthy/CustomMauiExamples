@@ -2,6 +2,12 @@
 
 This is an evolution of my frequently referenced Custom Xamarin Demos repository. This is where you will find helpful implementations of edge-case scenarios that fall outside the scope of commercial support.
 
+## gRPC Demo
+
+This example comes with both the server and client projects. It uses a DataGrid to show results form real-time stock trades. Find the Visual Studio solution in the `src\RealtimeDataSystem` folder.
+
+Please refer to [Microsoft gRPC documentation](https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-6.0&tabs=visual-studio) for more information about gRPC in a .NET application.
+
 ## FlyoutPage Navigation Demo
 
 This demo shows you how you can use **FlyoutPage** to navigate around an application. It shows you both top level and drill-down details page navigation without the use of **Shell**.
