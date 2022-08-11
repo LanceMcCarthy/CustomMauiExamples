@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "RealtimeDataSystem.Maui";
+
+package stock;
+
+service Stock {
+  rpc GetQuote (QuoteRequest) returns (QuoteReply);
+  rpc BuyOrder (BuyRequest) returns (TransactionReply);
+  rpc SellOrder (SellRequest) returns (TransactionReply);
+}
+
+message QuoteRequest {
+  string ticker = 1;
+}
+
+message QuoteReply {
+  string ticker = 1;
+  double quote = 2;
+  google.protobuf.Timestamp quote_time = 3;
+}
+
+message BuyRequest {
+  string ticker = 1;
+  double quote = 2;
+  int32 quantity = 3;
+}
+
+message SellRequest {
+  string ticker = 1;
+  double quote = 2;
+  int32 quantity = 3;
+}
+
+message TransactionReply {
+  string ticker = 1;
+  int32 quantity = 2;
+  bool transaction_confirmed = 3;
+  double price = 4;
+}
+
+
+// Protobuf message help https://docs.microsoft.com/en-us/aspnet/core/grpc/protobuf?view=aspnetcore-6.0

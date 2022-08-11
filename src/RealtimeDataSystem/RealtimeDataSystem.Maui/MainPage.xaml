@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:viewModels="using:RealtimeDataSystem.Maui.ViewModels"
+             x:Class="RealtimeDataSystem.Maui.MainPage"
+             x:DataType="{x:Type viewModels:MainPageViewModel}">
+
+    <Grid RowDefinitions="*, Auto">
+
+        <telerik:RadDataGrid ItemsSource="{Binding TransactionReplies}" />
+
+        <Grid RowDefinitions="*,*,*,*,*"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="10"
+              RowSpacing="5"
+              Padding="10"
+              Grid.Row="1">
+
+            <telerik:RadComboBox ItemsSource="{Binding TransactionTypes}"
+                                 SelectedItem="{Binding SelectedTransactionType, Mode=TwoWay}"
+                                 Grid.Row="0" />
+            <telerik:RadEntry Text="{Binding TickerSymbol}"
+                              Grid.Row="1" />
+            <telerik:RadNumericInput Value="{Binding RequestedQuantity}"
+                                     Step="1"
+                                     Grid.Row="2" />
+            <telerik:RadNumericInput Value="{Binding RequestedPrice}"
+                                     StringFormat="{}{0:C2}"
+                                     Minimum="0"
+                                     Maximum="1000"
+                                     Step="0.5"
+                                     Grid.Row="3" />
+            <telerik:RadButton Text="Make Request"
+                               Command="{Binding MakeRequestCommand}"
+                               Grid.Row="4" />
+
+            <Label Text="Latest Quote"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Grid.Row="0"
+                   Grid.Column="1"/>
+            <Label Text="{Binding LatestQuoteReply.Ticker, StringFormat='Symbol: {0}'}"
+                   HorizontalOptions="Center"
+                   Grid.Row="1"
+                   Grid.Column="1"/>
+            <Label Text="{Binding LatestQuoteReply.Quote, StringFormat='Price: {0:C2}'}"
+                   HorizontalOptions="Center"
+                   Grid.Row="2"
+                   Grid.Column="1" />
+            <Label Text="{Binding LatestQuoteReply.QuoteTime, StringFormat='Timestamp: {0:T}'}"
+                   HorizontalOptions="Center"
+                   Grid.Row="3"
+                   Grid.Column="1" />
+
+            <Label Text="{Binding IsBusyMessage}"
+                   TextColor="Red"
+                   Grid.Row="4"
+                   Grid.Column="1"/>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
