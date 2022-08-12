@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BlazorHybridWithTelerikXaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="BlazorHybridWithTelerikXaml.MainPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <BlazorWebView HostPage="wwwroot/index.html">
+        <BlazorWebView.RootComponents>
+            <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
+        </BlazorWebView.RootComponents>
+    </BlazorWebView>
+
+    <!-- 
+    IMPORTANT NOTE
+    - A .NET MAUI Blazor Hybrid app is technically still a XAML application, your Blazor code runs inside a special BlazorWebView (above).
+    - This means you can still layer another XAML component on  top of the BlazorWebView like I have done with this RadPopup, but it can literally be any XAML element.
+    -->
+    <telerik:RadPopup.Popup>
+        <telerik:RadPopup x:Name="popup"
+                          Placement="Center"
+                          IsModal="True"
+                          OutsideBackgroundColor="#6F000000">
+            <telerik:RadBorder CornerRadius="8"
+                               BackgroundColor="CornflowerBlue"
+                               Padding="10">
+                <Grid Padding="10"
+                      WidthRequest="200"
+                      HeightRequest="150"
+                      RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="This is a Telerik UI for MAUI RadPopUp on top of a MAUI BlazorWebView!"
+                           TextColor="AntiqueWhite"
+                           LineBreakMode="WordWrap" />
+
+                    <telerik:RadButton Padding="2"
+                                       HorizontalOptions="Center"
+                                       Text="Yes"
+                                       Clicked="ClosePopup"
+                                       Grid.Row="1" />
+                </Grid>
+            </telerik:RadBorder>
+        </telerik:RadPopup>
+    </telerik:RadPopup.Popup>
+
+</ContentPage>
