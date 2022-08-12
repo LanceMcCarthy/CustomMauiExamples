@@ -3,7 +3,7 @@
 This is an evolution of my frequently referenced Custom Xamarin Demos repository. This is where you will find helpful implementations of edge-case scenarios that fall outside the scope of commercial support.
 
 | Demo Description | Code | 
-|------|------|-------------|
+|------|------|
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
