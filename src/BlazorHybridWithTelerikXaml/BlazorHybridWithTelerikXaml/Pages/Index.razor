@@ -1,0 +1,12 @@
+﻿@page "/"
+
+<h3>Telerik XAML controls in MAUI Blazor Hybrid Example</h3>
+
+<button @onclick="DoSomethingAsync">Open Telerik XAML RadPopup</button>
+
+@code{
+    private async Task DoSomethingAsync()
+    {
+        await (App.Current.MainPage as MainPage).ShowTelerikMauiPopup();
+    }
+}

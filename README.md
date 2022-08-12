@@ -2,13 +2,19 @@
 
 This is an evolution of my frequently referenced Custom Xamarin Demos repository. This is where you will find helpful implementations of edge-case scenarios that fall outside the scope of commercial support.
 
+| Demo Description | Code | 
+|------|------|-------------|
+| [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
+| [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
+| [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
 ## gRPC Demo
 
 This example comes with both the server and client projects. It uses a DataGrid to show results form real-time stock trades. Find the Visual Studio solution in the `src\RealtimeDataSystem` folder.
 
 Please refer to [Microsoft gRPC documentation](https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-6.0&tabs=visual-studio) for more information about gRPC in a .NET application.
 
-## FlyoutPage Navigation Demo
+## FlyoutPage Navigation
 
 This demo shows you how you can use **FlyoutPage** to navigate around an application. It shows you both top level and drill-down details page navigation without the use of **Shell**.
 
@@ -26,5 +32,9 @@ After signing in, the `Detail` of the **FlyoutPage** is replaced with a **Naviga
 Finally, because the `FlyoutPage.Detail` is a **NavigationPage**, we can 'drill-down' navigate from the RoutesPage to a "RouteDetailPage" while still technically being on the Routes page that was selected in the menu.
 
 ![Route Details Page](https://user-images.githubusercontent.com/3520532/169628313-e22e63f2-b662-4138-ab92-71b9b1f88ab1.png)
+
+## Blazor Hybrid With Telerik XAML
+
+This demo shows you how you can access the XAML part of a .NET MAUI Blazor Hybrid application. It uses a simple RadPopup, but the concept applies to anything else you might want to do on top of the BlazorWebView.
 
 
