@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="LantzControls.Primitives.FloatingLabel"
+             x:Name="ThisView">
+
+    <Grid Padding="5" MinimumHeightRequest="50">
+        <!-- This is where your content will get placed. 
+             - If that item supports Focus events, then the overlay will show/hide based on the Focus value of the child 
+             - The Focus/Unfocus event of the child will be persisted
+        -->
+        <ContentPresenter x:Name="Presenter"
+                          Focused="Presenter_OnFocused"
+                          Unfocused="Presenter_OnUnfocused"
+                          VerticalOptions="Fill"
+                          HorizontalOptions="Fill"
+                          Content="{Binding InnerContent, Source={x:Reference ThisView}}"/>
+
+        <Grid x:Name="OverlayGrid"
+              InputTransparent="True"
+              VerticalOptions="Fill"
+              HorizontalOptions="Fill">
+            <telerik:RadBorder x:Name="OverlayBorder"
+                               CornerRadius="{Binding CornerRadius, Source={x:Reference ThisView}}"
+                               BorderThickness="2"
+                               BorderColor="#0000fa"/>
+
+            <!-- The background color of the little text area responds to theme changes, visit this doc to learn more https://docs.microsoft.com/en-us/dotnet/maui/user-interface/system-theme-changes -->
+            <Grid BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start"
+                  Margin="15,-4,0,0"
+                  Padding="5,0,5,0">
+                <Label x:Name="OverlayLabel"
+                       Text="{Binding Text, Source={x:Reference ThisView}}"
+                       TextColor="{Binding TextColor, Source={x:Reference ThisView}}"
+                       FontSize="{Binding FontSize, Source={x:Reference ThisView}}"
+                       Padding="0"
+                       VerticalOptions="Start"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentView>

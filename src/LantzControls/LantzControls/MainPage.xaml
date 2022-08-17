@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:primitives="clr-namespace:LantzControls.Primitives"
+             x:Class="LantzControls.MainPage">
+
+    <!-- Measure & Arrange Workaround: At runtime, change the Grid to a VerticalStackLayout -->
+    <Grid>
+        <primitives:FloatingLabel CornerRadius="10"
+                                  Text="Product Code"
+                                  FontSize="8"
+                                  TextColor="#0000fa"
+                                  WidthRequest="150"
+                                  VerticalOptions="Start"
+                                  HorizontalOptions="Start">
+            <primitives:FloatingLabel.InnerContent>
+                <telerik:RadEntry x:Name="MyRadEntry"
+                                  Placeholder="Product Code"
+                                  PlaceholderColor="#a8aba8"
+                                  FontSize="12"
+                                  HeightRequest="35"
+                                  CornerRadius="8"
+                                  BorderThickness="2"
+                                  BorderBrush="#a8aba8"
+                                  FocusedBorderThickness="0"
+                                  FocusedBorderBrush="Transparent"
+                                  HorizontalOptions="Fill" />
+            </primitives:FloatingLabel.InnerContent>
+        </primitives:FloatingLabel>
+    </Grid>
+</ContentPage>
