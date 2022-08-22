@@ -5,7 +5,6 @@
              xmlns:primitives="clr-namespace:LantzControls.Primitives"
              x:Class="LantzControls.MainPage">
 
-    <!-- Measure & Arrange Workaround: At runtime, change the Grid to a VerticalStackLayout -->
     <Grid>
         <primitives:FloatingLabel CornerRadius="10"
                                   Text="Product Code"

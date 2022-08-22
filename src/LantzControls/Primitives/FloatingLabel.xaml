@@ -5,12 +5,14 @@
              x:Class="LantzControls.Primitives.FloatingLabel"
              x:Name="ThisView">
 
-    <Grid Padding="5" MinimumHeightRequest="50">
+    <Grid Padding="5"
+          RowDefinitions="Auto"
+          MinimumHeightRequest="50">
         <!-- This is where your content will get placed. 
              - If that item supports Focus events, then the overlay will show/hide based on the Focus value of the child 
              - The Focus/Unfocus event of the child will be persisted
         -->
-        <ContentPresenter x:Name="Presenter"
+        <ContentView x:Name="Presenter"
                           Focused="Presenter_OnFocused"
                           Unfocused="Presenter_OnUnfocused"
                           VerticalOptions="Fill"
