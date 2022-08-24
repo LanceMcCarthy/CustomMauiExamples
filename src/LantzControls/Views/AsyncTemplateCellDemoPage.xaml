@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:listView="clr-namespace:LantzControls.Data.ListView"
+             xmlns:converters="clr-namespace:LantzControls.Converters"
+             x:Class="LantzControls.Views.AsyncTemplateCellDemoPage"
+             Title="AsyncTemplateCellDemoPage">
+
+    <ContentPage.Resources>
+        <converters:StatusToColorConverter x:Key="StatusToColorConv" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <telerik:RadListView x:Name="ListView1">
+            <telerik:RadListView.ItemTemplate>
+                <DataTemplate>
+                    <listView:AsyncListViewTemplateCell>
+                        <listView:AsyncListViewTemplateCell.View>
+                            <Grid Margin="20">
+                                <StackLayout>
+                                    <Label Text="{Binding CreatedBy, StringFormat='Created by: {0}'}" />
+                                    <Label Text="{Binding Recipient, StringFormat='Recipient: {0}'}" />
+                                    <Label Text="{Binding Status, StringFormat='Status: {0}'}"
+                                           TextColor="{Binding Status, Converter={StaticResource StatusToColorConv}}" />
+                                    <Label Text="{Binding Description}" />
+                                </StackLayout>
+
+                                <telerik:RadBusyIndicator x:Name="LoadingIndicator"
+                                                                    IsBusy="{Binding IsFetchingData}"
+                                                                    IsVisible="{Binding IsFetchingData}"
+                                                                    AnimationType="Animation9" />
+                            </Grid>
+                        </listView:AsyncListViewTemplateCell.View>
+                    </listView:AsyncListViewTemplateCell>
+                </DataTemplate>
+            </telerik:RadListView.ItemTemplate>
+        </telerik:RadListView>
+
+    </Grid>
+</ContentPage>

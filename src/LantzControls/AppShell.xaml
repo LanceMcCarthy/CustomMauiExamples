@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="LantzControls.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:LantzControls"
-    Shell.FlyoutBehavior="Disabled">
+<Shell x:Class="LantzControls.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:LantzControls.Views"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="True">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent Title="FloatingLabel"
+                  ContentTemplate="{DataTemplate views:FloatingLabelDemoPage}"
+                  Route="FloatingLabelDemoPage" />
+
+    <ShellContent Title="AsyncTemplateCell"
+                  ContentTemplate="{DataTemplate views:AsyncTemplateCellDemoPage}"
+                  Route="AsyncTemplateCellDemoPage" />
 
 </Shell>
