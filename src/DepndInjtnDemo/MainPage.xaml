@@ -2,29 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
-             xmlns:views="clr-namespace:DepndInjtnDemo.Views"
-             x:Class="DepndInjtnDemo.MainPage">
-
-    <Grid ColumnDefinitions="*,*">
-        <telerik:RadItemsControl ItemsSource="{Binding People}">
-            <telerik:RadItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Margin="10"
-                                 Spacing="5"
-                                 Orientation="Horizontal">
-                        <Label Text="{Binding Name}"
-                               FontSize="14" />
-                    </StackLayout>
-                </DataTemplate>
-            </telerik:RadItemsControl.ItemTemplate>
-        </telerik:RadItemsControl>
-
-        <views:ProductsView BindingContext="{Binding Products}" Grid.Column="1"/>
-
-        <Button Text="Reload People" 
-                Command="{Binding ReloadPeopleCommand}" 
-                HorizontalOptions="Center" 
-                VerticalOptions="End"
-                Margin="20"/>
-    </Grid>
+             x:Class="DepndInjtnDemo.MainPage"
+             Title="{Binding MainTitle}">
+    <telerik:RadTabView x:Name="MyTabView1" />
 </ContentPage>

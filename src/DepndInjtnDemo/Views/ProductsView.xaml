@@ -4,7 +4,7 @@
              xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
              x:Class="DepndInjtnDemo.Views.ProductsView">
     <telerik:RadItemsControl x:Name="itemsControl"
-                             ItemsSource="{Binding}">
+                             ItemsSource="{Binding Products}">
         <telerik:RadItemsControl.ItemTemplate>
             <DataTemplate>
                 <StackLayout Margin="10"

@@ -1,4 +1,6 @@
-﻿using Telerik.Maui.Controls.Compatibility;
+﻿using DepndInjtnDemo.ViewModels;
+using DepndInjtnDemo.Views;
+using Telerik.Maui.Controls.Compatibility;
 
 namespace DepndInjtnDemo;
 
@@ -17,7 +19,25 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
-
+        
         return builder.Build();
+    }
+
+    public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<ProductsViewModel>();
+        builder.Services.AddSingleton<PeopleViewModel>();
+
+        return builder;
+    }
+
+    public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<ProductsView>();
+        builder.Services.AddSingleton<PeopleView>();
+
+        return builder;
     }
 }
