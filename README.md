@@ -4,15 +4,22 @@ This is an evolution of my frequently referenced Custom Xamarin Demos repository
 
 | Demo Description | Code | 
 |------|------|
+| [PDF Viewer](#pdf-viewer) | [src/CustomPdfViewer](src/CustomPdfViewer) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
+## PDF Viewer
+
+In the absense of a dedicated PdfViewer component that uses native drawing APIs to render the document, you can use the platform's WebView. This example shows how to take any PDF file, save it into a temporary cache file and load that into the WebView.
+
+![pdf](https://user-images.githubusercontent.com/3520532/204874148-a390911a-59cc-430a-9fee-afe1ea6198ed.png)
+
 ## TabViewItems with Dependency Injection
 
-this demo shows you how you can levergare .NET MAUI's amazing built-in Dependency Injection to acive e IoC with your views and view models.
+This demo shows you how you can levergare .NET MAUI's amazing built-in Dependency Injection to acive e IoC with your views and view models.
 
 ![image](https://user-images.githubusercontent.com/3520532/201428243-95840722-f319-4676-9210-14b4c61bcfd2.png)
 
