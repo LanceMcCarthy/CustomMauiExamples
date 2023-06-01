@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="MultiWindowDemo.Maui.MainPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="HeaderButtonStyle"
+               TargetType="Button">
+            <Setter Property="FontFamily"
+                    Value="{x:Static telerik:TelerikFont.Name}"/>
+            <Setter Property="TextColor"
+                    Value="Gray"/>
+            <Setter Property="FontAutoScalingEnabled"
+                    Value="True"/>
+            <Setter Property="WidthRequest"
+                    Value="20"/>
+            <Setter Property="HeightRequest"
+                    Value="20"/>
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            <Setter Property="BorderWidth"
+                    Value="0"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <telerik:RadTabView x:Name="tabView">
+        <telerik:RadTabView.HeaderItemTemplate>
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*,Auto">
+                    <!-- Original TabViewHeaderItem_ControlTemplate -->
+                    <telerik:RadBorder BackgroundColor="{TemplateBinding BackgroundColor}"
+                                       BorderColor="{TemplateBinding BorderColor}"
+                                       BorderThickness="2,0,0,0"
+                                       CornerRadius="{TemplateBinding CornerRadius}"
+                                       Padding="{TemplateBinding ContentPadding}"
+                                       Content="{TemplateBinding Content}" />
+
+                    <!-- Custom content -->
+                    <HorizontalStackLayout BindingContext="{TemplateBinding}" 
+                                           Grid.Column="1" >
+                        <Button Text="{x:Static telerik:TelerikFont.IconLeftArrow}"
+                                Style="{StaticResource HeaderButtonStyle}"
+                                Clicked="OnMoveTabLeftClicked"/>
+                        <Button Text="{x:Static telerik:TelerikFont.IconRightArrow}"
+                                Style="{StaticResource HeaderButtonStyle}"
+                                Clicked="OnMoveTabRightClicked"/>
+                        <Button Text="{x:Static telerik:TelerikFont.IconUpArrow}"
+                                Style="{StaticResource HeaderButtonStyle}"
+                                Clicked="OnOpenWindowClicked"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </ControlTemplate>
+        </telerik:RadTabView.HeaderItemTemplate>
+        <telerik:RadTabView.HeaderTemplate>
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*,Auto"
+                      BackgroundColor="White">
+                    <!-- Original TabViewHeader_ControlTemplate -->
+                    <telerik:RadBorder BackgroundColor="{TemplateBinding BackgroundColor}"
+                                       BorderColor="{TemplateBinding BorderColor}"
+                                       BorderThickness="{TemplateBinding BorderThickness}"
+                                       CornerRadius="{TemplateBinding CornerRadius}"
+                                       Padding="{TemplateBinding ContentPadding}"
+                                       Content="{TemplateBinding Content}" />
+
+                    <!-- Custom content -->
+                    <HorizontalStackLayout Grid.Column="1"
+                                           Padding="5">
+                        <Button Text="{x:Static telerik:TelerikFont.IconAdd}"
+                                Style="{StaticResource HeaderButtonStyle}"
+                                Clicked="OnAddTabClicked"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </ControlTemplate>
+        </telerik:RadTabView.HeaderTemplate>
+    </telerik:RadTabView>
+
+</ContentPage>
