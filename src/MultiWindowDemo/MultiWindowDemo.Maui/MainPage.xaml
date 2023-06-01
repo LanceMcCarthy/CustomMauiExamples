@@ -9,6 +9,8 @@
                TargetType="Button">
             <Setter Property="FontFamily"
                     Value="{x:Static telerik:TelerikFont.Name}"/>
+            <Setter Property="TextColor"
+                    Value="Gray"/>
             <Setter Property="FontAutoScalingEnabled"
                     Value="True"/>
             <Setter Property="WidthRequest"
