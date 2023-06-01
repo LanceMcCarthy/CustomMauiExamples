@@ -5,69 +5,81 @@ namespace MultiWindowDemo.Maui;
 
 public partial class MainPage : ContentPage
 {
-    // first launch
-	public MainPage()
-	{
-		InitializeComponent();
-        tabView.Items.Add(new TabViewItem{ HeaderText = "Home", Content = new HomeView() });
-        tabView.Items.Add(new TabViewItem{ HeaderText = "Folder", Content = new FolderView() });
-        tabView.Items.Add(new TabViewItem{ HeaderText = "Help", Content = new HelpView() });
-	}
-
-    // if this is a new window created by tearing off a tab
+    /// <summary>
+    /// Creates a new MainWindow with the three default TabView items.
+    /// </summary>
+    public MainPage()
+    {
+        InitializeComponent();
+        tabView.Items.Add(new TabViewItem { HeaderText = "Home", Content = new HomeView() });
+        tabView.Items.Add(new TabViewItem { HeaderText = "Folder", Content = new FolderView() });
+        tabView.Items.Add(new TabViewItem { HeaderText = "Help", Content = new HelpView() });
+    }
+    
+    /// <summary>
+    /// Creates a new MainWindow instance
+    /// </summary>
+    /// <param name="breakawayTab">Reference to a TabViewItem that will be placed in the new window's RadTabView</param>
     public MainPage(TabViewItem breakawayTab)
     {
         InitializeComponent();
         tabView.Items.Add(breakawayTab);
     }
-    
+
     private void OnOpenWindowClicked(object sender, EventArgs e)
     {
-        // Phase 1 - get a reference to the TabViewItem
-        var headerText = (sender as Button)?.BindingContext as string;
-        var breakawayTab = tabView.Items.First(i => i.HeaderText == headerText);
-        
-        // Phase 2 - "move" the TabViewItem to a new window
-        var startingPage = new MainPage(breakawayTab);
-        Application.Current.OpenWindow(new Window(startingPage));
-        tabView.Items.Remove(breakawayTab);
+        if (sender is Button { BindingContext: TabViewHeaderItem headerItem })
+        {
+            // Get a reference to the TabViewItem
+            var breakawayTab = tabView.Items.First(i => i.HeaderText == headerItem.Text);
+
+            // Create/open a new Window, using the new MainPage and the breakaway TabViewItem
+            Application.Current?.OpenWindow(new Window(new MainPage(breakawayTab)));
+
+            // Finally, if all goes well, we can remove the tab from the original window's TabView
+            tabView.Items.Remove(breakawayTab);
+        }
     }
 
     private void OnMoveTabLeftClicked(object sender, EventArgs e)
     {
-        var headerText = (sender as Button)?.BindingContext as string;
-        var tab = tabView.Items.First(i => i.HeaderText == headerText);
+        if (sender is Button { BindingContext: TabViewHeaderItem headerItem })
+        {
+            var tab = tabView.Items.First(i => i.HeaderText == headerItem.Text);
 
-        var currentIndex = tabView.Items.IndexOf(tab);
+            var currentIndex = tabView.Items.IndexOf(tab);
 
-        // the item is already at the far left
-        if(currentIndex == 0)
-            return;
-
-        tabView.Items.Insert(currentIndex - 1, tab);
+            // If it is safe to do so, move the tab to the left
+            if (currentIndex > 0)
+            {
+                tabView.Items.Insert(currentIndex - 1, tab);
+            }
+        }
     }
 
     private void OnMoveTabRightClicked(object sender, EventArgs e)
     {
-        var headerText = (sender as Button)?.BindingContext as string;
-        var tab = tabView.Items.First(i => i.HeaderText == headerText);
+        if (sender is Button { BindingContext: TabViewHeaderItem headerItem })
+        {
+            var tab = tabView.Items.First(i => i.HeaderText == headerItem.Text);
 
-        var currentIndex = tabView.Items.IndexOf(tab);
+            var currentIndex = tabView.Items.IndexOf(tab);
 
-        // The item is already at the far right
-        if(currentIndex == tabView.Items.Count - 1)
-            return;
-
-        tabView.Items.Insert(currentIndex + 1, tab);
+            // If it is safe to do so, move the tab to the right
+            if (currentIndex < tabView.Items.Count - 1)
+            {
+                tabView.Items.Insert(currentIndex + 1, tab);
+            }
+        }
     }
-    
-    // ONE BUTTON - Adds new tab
+
+    // Adds new tab
     private void OnAddTabClicked(object sender, EventArgs e)
     {
-        tabView.Items.Add(new TabViewItem()
+        tabView.Items.Add(new TabViewItem
         {
             HeaderText = "Added Tab",
-            Content = new Label(){Text = "I am an added tab"}
+            Content = new Label { Text = "I am an added tab" }
         });
     }
 }
