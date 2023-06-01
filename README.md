@@ -1,9 +1,10 @@
 # Custom Maui Examples
 
-This is an evolution of my frequently referenced Custom Xamarin Demos repository. This is where you will find helpful implementations of edge-case scenarios that fall outside the scope of commercial support.
+This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](https://github.com/LanceMcCarthy/CustomXamarinDemos), but strictly for .NET MAUI applications. This is where you will find helpful implementations of edge-case scenarios that fall outside the [scope of support](https://www.telerik.com/account/support-center/scope).
 
 | Demo Description | Code | 
 |------|------|
+| [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
 | [PDF Viewer](#pdf-viewer) | [src/CustomPdfViewer](src/CustomPdfViewer) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
@@ -11,15 +12,29 @@ This is an evolution of my frequently referenced Custom Xamarin Demos repository
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
+## Multi-Window TabView
+
+A custom project that demonstrates "tear-able tabs" with [RadTabView](https://docs.telerik.com/devtools/maui/controls/tabview/overview) and .NET MAUI's [multi-window features](https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/windows). 
+
+### Before
+
+![before](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/5f9481a6-599d-44a8-bce4-ad0b4c3c84da)
+
+### After
+
+![after](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/3f51435f-50d4-4767-98d4-a14c20ad6016)
+
+> The buttons in the tab headers also let you move tabs left or right.
+
 ## PDF Viewer
 
-In the absense of a dedicated PdfViewer component that uses native drawing APIs to render the document, you can use the platform's WebView. This example shows how to take any PDF file, save it into a temporary cache file and load that into the WebView.
+In the absence of a dedicated PdfViewer component that uses native drawing APIs to render the document, you can use the platform's WebView. This example shows how to take any PDF file, save it into a temporary cache file and load that into the WebView.
 
 ![pdf](https://user-images.githubusercontent.com/3520532/204874148-a390911a-59cc-430a-9fee-afe1ea6198ed.png)
 
 ## TabViewItems with Dependency Injection
 
-This demo shows you how you can levergare .NET MAUI's amazing built-in Dependency Injection to acive e IoC with your views and view models.
+This demo shows you how you can leverage .NET MAUI's built-in Dependency Injection to achieve IoC with your views and view models.
 
 ![image](https://user-images.githubusercontent.com/3520532/201428243-95840722-f319-4676-9210-14b4c61bcfd2.png)
 
@@ -31,7 +46,7 @@ Please refer to [Microsoft gRPC documentation](https://docs.microsoft.com/en-us/
 
 ## Lantz Controls
 
-This is project that has various different custom controls and will evolve over time as I add more. Currently, there is only a `FloatingLabel` control.
+This is project that has various custom controls and will evolve over time as I add more. Currently, there is only a `FloatingLabel` control.
 
 #### FloatingLabel
 
@@ -49,7 +64,7 @@ Focused with RadEntry and Text Content
 
 ## FlyoutPage Navigation
 
-This demo shows you how you can use **FlyoutPage** to navigate around an application. It shows you both top level and drill-down details page navigation without the use of **Shell**.
+This demo shows you how you can use **FlyoutPage** to navigate around an application. It shows you both top level and drill-down details page navigation without using **Shell**.
 
 On initial launch, the FlyoutPage's `Detail` property is set to an instance of a ContentPage for authentication.
 
