@@ -1,5 +1,6 @@
 ﻿#nullable enable
 #if WINDOWS
+using System.Diagnostics;
 using CustomReportViewer.Controls;
 using CustomReportViewer.WinUI;
 using Microsoft.Maui.Handlers;
@@ -14,14 +15,14 @@ namespace CustomReportViewer.Handlers
         {
             base.ConnectHandler(platformView);
 
-            // initial setup
-            platformView.ReportEngineConnection = VirtualView.RestServiceUrl;
-            platformView.ReportSource = new Telerik.Reporting.UriReportSource { Uri = VirtualView.ReportName };
+            Debug.WriteLine("MauiReportViewerHandler ConnectHandler called");
         }
-
+        
         protected override void DisconnectHandler(WindowsReportViewer platformView)
         {
             base.DisconnectHandler(platformView);
+
+            Debug.WriteLine("MauiReportViewerHandler DisconnectHandler called");
         }
 
         public static void MapRestServiceUrl(MauiReportViewerHandler handler, MauiReportViewer viewer)
