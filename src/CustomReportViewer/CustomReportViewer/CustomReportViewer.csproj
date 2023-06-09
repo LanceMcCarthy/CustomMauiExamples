@@ -50,7 +50,9 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
-	    <PackageReference Include="Telerik.ReportViewer.WinUI" Version="17.1.23.606" />
+		<PackageReference Include="Telerik.WinUI.Controls" Version="2.6.0" />
+		<PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="17.1.23.606" />
+		<PackageReference Include="Telerik.ReportViewer.WinUI" Version="17.1.23.606" />
 		<PackageReference Include="WinUIEx" Version="1.8.0" />
 	</ItemGroup>
 

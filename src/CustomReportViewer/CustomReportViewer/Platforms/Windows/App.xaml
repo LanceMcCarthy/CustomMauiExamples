@@ -5,4 +5,12 @@
     xmlns:maui="using:Microsoft.Maui"
     xmlns:local="using:CustomReportViewer.WinUI">
 
+    <maui:MauiWinUIApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Telerik.WinUI.Controls/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Telerik.ReportViewer.WinUI.Themes/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </maui:MauiWinUIApplication.Resources>
 </maui:MauiWinUIApplication>
