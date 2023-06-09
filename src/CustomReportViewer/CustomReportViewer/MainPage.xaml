@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CustomReportViewer.Controls"
+             x:Class="CustomReportViewer.MainPage">
+
+    <Grid>
+        <!-- This custom MauiReportViewer control uses
+        *************************************************************
+        *| PLATFORM | HANDLER                                      |*
+        *|~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|*
+        *| Windows  | Telerik WinUI 3 ReportViewer (native!)       |*
+        *| iOS      | Platform-native WebView & HTML5 ReportViewer |*
+        *| Mac      | Platform-native WebView & HTML5 ReportViewer |*
+        *| Android  | Platform-native WebView & HTML5 ReportViewer |*
+        *************************************************************  -->
+
+        <controls:MauiReportViewer RestServiceUrl="https://webapifortelerikdemos.azurewebsites.net/api/reports"
+                                   ReportName="Barcodes Report.trdp"/>
+    </Grid>
+
+</ContentPage>
