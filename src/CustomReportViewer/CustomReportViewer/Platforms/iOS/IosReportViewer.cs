@@ -23,7 +23,7 @@ public class IosReportViewer : UIView
         var htmlString = $@"<!DOCTYPE html>
                             <html xmlns=""http://www.w3.org/1999/xhtml"">
                                 <head>
-                                    <title>Telerik MVC HTML5 Report Viewer</title>
+                                    <title>Telerik HTML5 Report Viewer</title>
                                     <meta http-equiv=""X-UA-Compatible"" content=""IE=edge"">
                                     <meta name=""viewport"" content=""width=device-width, initial-scale=1, maximum-scale=1"" />
 
