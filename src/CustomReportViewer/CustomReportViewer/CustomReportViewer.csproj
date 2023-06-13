@@ -59,10 +59,4 @@
 		<FrameworkReference Include="Microsoft.WindowsDesktop.App.Wpf" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="OldApproach\ReportViewer.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>
