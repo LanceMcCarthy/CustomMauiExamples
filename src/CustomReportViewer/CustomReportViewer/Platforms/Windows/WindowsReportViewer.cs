@@ -12,37 +12,49 @@ public class WindowsReportViewer : Microsoft.UI.Xaml.Controls.Grid
 {
     private MauiReportViewer _virtualView;
     private Telerik.ReportViewer.WinUI.ReportViewer _viewer;
+    private string _reportEngineConnection;
+    private UriReportSource _reportSource;
 
     public WindowsReportViewer(MauiReportViewer virtualView)
     {
         Debug.WriteLine("WindowsReportViewer is being constructed");
         this._virtualView = virtualView;
+        this._reportEngineConnection = $"engine=RestService;uri={virtualView.RestServiceUrl}";
+        this._reportSource = new UriReportSource { Uri = virtualView.ReportName };
 
         this._viewer = new Telerik.ReportViewer.WinUI.ReportViewer()
         {
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
-            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch,
+            ReportEngineConnection = this._reportEngineConnection,
+            ReportSource = this._reportSource
         };
-
-        this.Children.Add(this._viewer);
-
-        this._viewer.ReportEngineConnection = $"engine=RestService;uri={virtualView.RestServiceUrl}";
-        this._viewer.ReportSource = new UriReportSource { Uri = virtualView.ReportName };
         
-        this._viewer.RefreshReport();
+        this.Children.Add(this._viewer);
     }
 
     public void UpdateRestServiceUrl(string connection)
     {
-        Debug.WriteLine($"WindowsReportViewer UpdateRestServiceUrl called: {connection}");
-        this._viewer.ReportEngineConnection = $"engine=RestService;uri={connection}";
-        this._viewer.RefreshReport();
+        var state = this._viewer.ReportViewerModel.GetState();
+        Debug.WriteLine($"WindowsReportViewer UpdateRestServiceUrl called: {connection}, State: {state}");
+        this._reportEngineConnection = $"engine=RestService;uri={connection}";
+
+
+        this.UpdateReport();
     }
 
     public void UpdateReportName(string name)
     {
-        Debug.WriteLine($"WindowsReportViewer UpdateReportName called: {name}");
-        this._viewer.ReportSource = new UriReportSource { Uri = name };
+        var state = this._viewer.ReportViewerModel.GetState();
+        Debug.WriteLine($"WindowsReportViewer UpdateReportName called: {name}, State: {state}");
+        this._reportSource = new UriReportSource { Uri = name };
+        this.UpdateReport();
+    }
+
+    private void UpdateReport()
+    {
+        this._viewer.ReportEngineConnection = _reportEngineConnection;
+        this._viewer.ReportSource = _reportSource;
         this._viewer.RefreshReport();
     }
 }
