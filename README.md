@@ -5,7 +5,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | Demo Description | Code | 
 |------|------|
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
-| [PDF Viewer](#pdf-viewer) | [src/CustomPdfViewer](src/CustomPdfViewer) |
+| [Printing Demo](#printing) | [src/DocumentPrinting/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
@@ -26,11 +26,15 @@ A custom project that demonstrates "tear-able tabs" with [RadTabView](https://do
 
 > The buttons in the tab headers also let you move tabs left or right.
 
-## PDF Viewer
+## Printing
 
-In the absence of a dedicated PdfViewer component that uses native drawing APIs to render the document, you can use the platform's WebView. This example shows how to take any PDF file, save it into a temporary cache file and load that into the WebView.
+In order to print in .NET MAUI, you must use the native platform APIs. On Windows, this also includes manually preparing the print preview. This example shows you how to print a PDF file on Windows, iOS, MacCatalyst, and Android.
 
-![pdf](https://user-images.githubusercontent.com/3520532/204874148-a390911a-59cc-430a-9fee-afe1ea6198ed.png)
+The code is in the `Helpers` folder, with each platform having its's own class file. Here's the result when starting a print on Windows.
+
+![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
+
+> This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
 
 ## TabViewItems with Dependency Injection
 
