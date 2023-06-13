@@ -3,18 +3,33 @@
 This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](https://github.com/LanceMcCarthy/CustomXamarinDemos), but strictly for .NET MAUI applications. This is where you will find helpful implementations of edge-case scenarios that fall outside the [scope of support](https://www.telerik.com/account/support-center/scope).
 
 | Demo Description | Code | 
-|------|------|
+|------|---|
+| [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
+| [MAUI ReportViewer Demo](#reportviewer) | [src/CustomReportViewer/](src/CustomReportViewer/) |
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
-| [Printing Demo](#printing) | [src/DocumentPrinting/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
-## Multi-Window TabView
+## ReportViewer
 
-A custom project that demonstrates "tear-able tabs" with [RadTabView](https://docs.telerik.com/devtools/maui/controls/tabview/overview) and .NET MAUI's [multi-window features](https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/windows). 
+This demo has a custom ReportViewer for .NET MAUI. That control's platform handler does two things:
+
+- On Windows, it uses the native winUI 3 ReportViewer throught he MAUI handler. This is a pure native Windows implementation.
+- On iOS, MacCatalyst, and Android: The HTML5 ReportViewer is used in a WebView thorugh BindableProperties to render reports.
+
+```xaml
+<controls:MauiReportViewer RestServiceUrl="https://webapifortelerikdemos.azurewebsites.net/api/reports"
+                           ReportName="Barcodes Report.trdp"/>
+```
+
+Runtime on Windows
+
+![Windows ReportViewer](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/9ff626b6-f7e2-4063-84c3-792d9572f218)
+
+For more information, see the code in the `Handlers` folder.
 
 ### Before
 
@@ -35,6 +50,20 @@ The code is in the `Helpers` folder, with each platform having its's own class f
 ![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
 
 > This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
+
+## Multi-Window TabView
+
+A custom project that demonstrates "tear-able tabs" with [RadTabView](https://docs.telerik.com/devtools/maui/controls/tabview/overview) and .NET MAUI's [multi-window features](https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/windows). 
+
+### Before
+
+![before](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/5f9481a6-599d-44a8-bce4-ad0b4c3c84da)
+
+### After
+
+![after](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/3f51435f-50d4-4767-98d4-a14c20ad6016)
+
+> The buttons in the tab headers also let you move tabs left or right.
 
 ## TabViewItems with Dependency Injection
 
