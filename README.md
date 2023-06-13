@@ -21,25 +21,18 @@ This demo has a custom ReportViewer for .NET MAUI. That control's platform handl
 - On iOS, MacCatalyst, and Android: The HTML5 ReportViewer is used in a WebView thorugh BindableProperties to render reports.
 
 ```xaml
-<controls:MauiReportViewer RestServiceUrl="https://webapifortelerikdemos.azurewebsites.net/api/reports"
-                           ReportName="Barcodes Report.trdp"/>
+<controls:MauiReportViewer 
+    RestServiceUrl="https://webapifortelerikdemos.azurewebsites.net/api/reports"
+    ReportName="Barcodes Report.trdp"/>
 ```
 
-Runtime on Windows
+### Runtime - Windows
 
 ![Windows ReportViewer](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/9ff626b6-f7e2-4063-84c3-792d9572f218)
 
 For more information, see the code in the `Handlers` folder.
 
-### Before
 
-![before](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/5f9481a6-599d-44a8-bce4-ad0b4c3c84da)
-
-### After
-
-![after](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/3f51435f-50d4-4767-98d4-a14c20ad6016)
-
-> The buttons in the tab headers also let you move tabs left or right.
 
 ## Printing
 
