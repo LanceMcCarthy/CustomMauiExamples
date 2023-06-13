@@ -1,0 +1,17 @@
+﻿<maui:MauiWinUIApplication
+    x:Class="CustomReportViewer.WinUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:maui="using:Microsoft.Maui"
+    xmlns:local="using:CustomReportViewer.WinUI"
+    RequestedTheme="Light">
+
+    <maui:MauiWinUIApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Telerik.WinUI.Controls/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Telerik.ReportViewer.WinUI.Themes/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </maui:MauiWinUIApplication.Resources>
+</maui:MauiWinUIApplication>

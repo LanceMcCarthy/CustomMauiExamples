@@ -3,14 +3,46 @@
 This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](https://github.com/LanceMcCarthy/CustomXamarinDemos), but strictly for .NET MAUI applications. This is where you will find helpful implementations of edge-case scenarios that fall outside the [scope of support](https://www.telerik.com/account/support-center/scope).
 
 | Demo Description | Code | 
-|------|------|
+|------|---|
+| [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
+| [MAUI ReportViewer Demo](#reportviewer) | [src/CustomReportViewer/](src/CustomReportViewer/) |
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
-| [Printing Demo](#printing) | [src/DocumentPrinting/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## ReportViewer
+
+This demo has a custom ReportViewer for .NET MAUI. That control's platform handler does two things:
+
+- On Windows, it uses the native winUI 3 ReportViewer throught he MAUI handler. This is a pure native Windows implementation.
+- On iOS, MacCatalyst, and Android: The HTML5 ReportViewer is used in a WebView thorugh BindableProperties to render reports.
+
+```xaml
+<controls:MauiReportViewer 
+    RestServiceUrl="https://webapifortelerikdemos.azurewebsites.net/api/reports"
+    ReportName="Barcodes Report.trdp"/>
+```
+
+### Runtime - Windows
+
+![Windows ReportViewer](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/9ff626b6-f7e2-4063-84c3-792d9572f218)
+
+For more information, see the code in the `Handlers` folder.
+
+
+
+## Printing
+
+In order to print in .NET MAUI, you must use the native platform APIs. On Windows, this also includes manually preparing the print preview. This example shows you how to print a PDF file on Windows, iOS, MacCatalyst, and Android.
+
+The code is in the `Helpers` folder, with each platform having its's own class file. Here's the result when starting a print on Windows.
+
+![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
+
+> This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
 
 ## Multi-Window TabView
 
@@ -25,16 +57,6 @@ A custom project that demonstrates "tear-able tabs" with [RadTabView](https://do
 ![after](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/3f51435f-50d4-4767-98d4-a14c20ad6016)
 
 > The buttons in the tab headers also let you move tabs left or right.
-
-## Printing
-
-In order to print in .NET MAUI, you must use the native platform APIs. On Windows, this also includes manually preparing the print preview. This example shows you how to print a PDF file on Windows, iOS, MacCatalyst, and Android.
-
-The code is in the `Helpers` folder, with each platform having its's own class file. Here's the result when starting a print on Windows.
-
-![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
-
-> This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
 
 ## TabViewItems with Dependency Injection
 
