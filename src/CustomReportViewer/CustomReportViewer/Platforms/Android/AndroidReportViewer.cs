@@ -1,60 +1,30 @@
 ﻿using Android.Content;
-using Android.Views;
-using Android.Webkit;
-using AndroidX.CoordinatorLayout.Widget;
 using CustomReportViewer.Controls;
+using WebView = Android.Webkit.WebView;
 
 namespace CustomReportViewer;
 
-public sealed partial class AndroidReportViewer : CoordinatorLayout
+public sealed partial class AndroidReportViewer : WebView
 {
+    public string BaseUrl = "file:///android_asset/";
     private Context _context;
     private MauiReportViewer _virtualView;
-    private Android.Webkit.WebView _webView;
 
     public AndroidReportViewer(Context context, MauiReportViewer virtualView) : base(context)
     {
         _context = context;
-        _virtualView = virtualView;
-
-        _webView = new Android.Webkit.WebView(_context);
-        _webView.Settings.UseWideViewPort = true;
-        _webView.Settings.LoadWithOverviewMode = true;
-        _webView.Settings.JavaScriptEnabled = true;
-        _webView.Settings.DefaultZoom = WebSettings.ZoomDensity.Far;
-
-        _webView.VerticalScrollBarEnabled = false;
-        _webView.HorizontalScrollBarEnabled = false;
-
-        var relativeLayout = new Android.Widget.RelativeLayout(_context)
-        {
-            LayoutParameters = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent)
-            {
-                Gravity = (int)GravityFlags.Fill,
-            }
-        };
-
-        relativeLayout.AddView(_webView);
-
-        this.AddView(relativeLayout);
+        _virtualView = virtualView ?? throw new ArgumentNullException("handler was null");
         
-        LoadReportViewer();
     }
 
-    public void UpdateRestServiceUrl(string connection)
-    {
-        this._virtualView.RestServiceUrl = connection;
-        LoadReportViewer();
-    }
+    public void UpdateRestServiceUrl(string connection) => this._virtualView.RestServiceUrl = connection;
 
-    public void UpdateReportName(string reportName)
-    {
-        this._virtualView.ReportName = reportName;
-        LoadReportViewer();
-    }
+    public void UpdateReportName(string reportName) => this._virtualView.ReportName = reportName;
 
-    private void LoadReportViewer()
+    public void LoadReportViewer()
     {
+        System.Diagnostics.Debug.WriteLine($"--- LoadReportViewer Started: ({_virtualView.ReportName} on {_virtualView.RestServiceUrl}).");
+
         var htmlString = $@"<!DOCTYPE html>
                             <html xmlns=""http://www.w3.org/1999/xhtml"">
                                 <head>
@@ -94,8 +64,13 @@ public sealed partial class AndroidReportViewer : CoordinatorLayout
                                         }});
                                     </script>
                                 </body>
-                            </html>";
+                            </html>
+        ";
+        
+        this.LoadDataWithBaseURL(BaseUrl, htmlString, "text/html", "UTF-8", null);
 
-        _webView.LoadDataWithBaseURL(null, htmlString, "text/html", "UTF-8", null);
+        //this.LoadData(htmlString, "text/html", "UTF-8");
+
+        System.Diagnostics.Debug.WriteLine($"--- LoadReportViewer Completed: ({_virtualView.ReportName} on {_virtualView.RestServiceUrl}).");
     }
 }
