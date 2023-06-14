@@ -120,7 +120,7 @@ public class MainPageViewModel : ViewModelBase
         IsBusy = true;
         IsBusyMessage = "Connecting to gRPC service...";
         
-        channel = GrpcChannel.ForAddress("https://localhost:7243/");
+        channel = GrpcChannel.ForAddress("http://localhost:5243/");
         client = new Grpc.Stock.StockClient(channel);
 
         IsBusyMessage = "ready to connect";
