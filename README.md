@@ -4,6 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo Description | Code | 
 |------|---|
+| [Custom Chart Legend](#custom-chart-legend) | [src/ScatterWithLegend/](src/ScatterWithLegend/) |
 | [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
 | [MAUI ReportViewer Demo](#reportviewer) | [src/CustomReportViewer/](src/CustomReportViewer/) |
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
@@ -12,6 +13,22 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## Custom Chart Legend
+
+If you would like more control over the appearance of your chart legend, create a completely custom legend with minimal effort using a RadItemsControl and the chart's Loaded event. This demo shows you exactly how it's done, visit MainPage to see the code.
+
+![custom chart legend](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/9f27470c-40a8-4b4c-a549-d90b4c158886)
+
+## Printing
+
+In order to print in .NET MAUI, you must use the native platform APIs. On Windows, this also includes manually preparing the print preview. This example shows you how to print a PDF file on Windows, iOS, MacCatalyst, and Android.
+
+The code is in the `Helpers` folder, with each platform having its's own class file. Here's the result when starting a print on Windows.
+
+![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
+
+> This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
 
 ## ReportViewer
 
@@ -31,18 +48,6 @@ This demo has a custom ReportViewer for .NET MAUI. That control's platform handl
 ![Windows ReportViewer](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/9ff626b6-f7e2-4063-84c3-792d9572f218)
 
 For more information, see the code in the `Handlers` folder.
-
-
-
-## Printing
-
-In order to print in .NET MAUI, you must use the native platform APIs. On Windows, this also includes manually preparing the print preview. This example shows you how to print a PDF file on Windows, iOS, MacCatalyst, and Android.
-
-The code is in the `Helpers` folder, with each platform having its's own class file. Here's the result when starting a print on Windows.
-
-![printing](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/8801026d-69c9-4a9d-b2bd-bd34ff6f8fdc)
-
-> This is very document specific, you will need to do different work for different document types as this demo project is simply a place for you to get started.
 
 ## Multi-Window TabView
 

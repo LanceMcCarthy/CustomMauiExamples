@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:local="clr-namespace:ScatterWithLegend"
+             x:Class="ScatterWithLegend.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="*, Auto">
+        <telerik:RadCartesianChart x:Name="chartTest"
+                                   Loaded="ChartTest_OnLoaded">
+            <telerik:RadCartesianChart.HorizontalAxis>
+                <telerik:NumericalAxis />
+            </telerik:RadCartesianChart.HorizontalAxis>
+            <telerik:RadCartesianChart.VerticalAxis>
+                <telerik:NumericalAxis />
+            </telerik:RadCartesianChart.VerticalAxis>
+
+            <telerik:RadCartesianChart.Series>
+                <telerik:ScatterPointSeries XValueBinding="XValue"
+                                            YValueBinding="YValue"
+                                            DisplayName="Latency"
+                                            ItemsSource="{Binding Data1}" />
+                <telerik:ScatterPointSeries XValueBinding="XValue"
+                                            YValueBinding="YValue"
+                                            DisplayName="Bandwidth"
+                                            ItemsSource="{Binding Data2}" />
+            </telerik:RadCartesianChart.Series>
+
+            <!-- Note: It's important to define a palette for the custom legend to work properly-->
+            <telerik:RadCartesianChart.Palette>
+                <telerik:ChartPalette>
+                    <telerik:ChartPalette.Entries>
+                        <telerik:PaletteEntry FillColor="#4FB6E7"
+                                              StrokeColor="#4FB6E7" />
+                        <telerik:PaletteEntry FillColor="#A666CE"
+                                              StrokeColor="#A666CE" />
+                    </telerik:ChartPalette.Entries>
+                </telerik:ChartPalette>
+            </telerik:RadCartesianChart.Palette>
+        </telerik:RadCartesianChart>
+
+        <!-- CUSTOM LEGEND -->
+        <telerik:RadBorder BorderColor="SlateGray"
+                           BackgroundColor="#99FFFFFF"
+                           BorderThickness="2"
+                           CornerRadius="10"
+                           Padding="5"
+                           Margin="5"
+                           HorizontalOptions="End"
+                           VerticalOptions="Start">
+            <telerik:RadItemsControl x:Name="LegendItemsControl"
+                                     Grid.Row="1">
+                <telerik:RadItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Padding="5"
+                                               Spacing="5">
+                            <telerik:RadBorder BackgroundColor="{Binding SeriesColor}"
+                                               WidthRequest="20"
+                                               HeightRequest="20" />
+                            <Label Text="{Binding SeriesDisplayName}"
+                                   FontSize="12"
+                                   VerticalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </telerik:RadItemsControl.ItemTemplate>
+            </telerik:RadItemsControl>
+        </telerik:RadBorder>
+    </Grid>
+</ContentPage>
