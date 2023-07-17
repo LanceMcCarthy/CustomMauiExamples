@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:converters="clr-namespace:SignatureEditor.Converters"
+             x:Class="SignatureEditor.Views.MainPage">
+
+    <ContentPage.Resources>
+        <converters:InvertBoolConverter x:Key="InvertBoolConv"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, 250, Auto">
+
+        <Label Text="Please sign below..."
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <telerik:RadSignaturePad x:Name="SignaturePad1"
+                                 BorderThickness="1"
+                                 BorderColor="LightGray"
+                                 Grid.Row="1"/>
+
+        <!-- the image's visibility is toggles based on whether there is a saved signature, or the app is in edit mode -->
+        <Image Source="{Binding CapturedSignatureImageSource}"
+               IsVisible="{Binding HasSignature}"
+               InputTransparent="{Binding HasSignature, Converter={StaticResource InvertBoolConv}}"
+               Grid.Row="1"/>
+
+
+        <!-- the command buttons dynamically hide/show depending on whether or not we're editing or viewing, they're below the Pad/Image area -->
+        <HorizontalStackLayout x:Name="ButtonsPanel" Grid.Row="2"
+                               Spacing="5"
+                               Padding="5"
+                               HorizontalOptions="End">
+            <Button Text="save"
+                    Command="{Binding SaveSignatureCommand}"
+                    IsVisible="{Binding HasSignature, Converter={StaticResource InvertBoolConv}}"
+                    BorderWidth="1"
+                    TextColor="Green"
+                    Background="White"/>
+            <Button Text="clear"
+                    Command="{Binding ClearSignatureCommand}"
+                    IsVisible="{Binding HasSignature, Converter={StaticResource InvertBoolConv}}"
+                    BorderWidth="1"
+                    BorderColor="Gray"
+                    TextColor="Gray"
+                    Background="White"/>
+            <Button Text="edit"
+                    Command="{Binding EditSignatureCommand}"
+                    IsVisible="{Binding HasSignature}"
+                    BorderWidth="1"
+                    BorderColor="Gray"
+                    TextColor="Gray"
+                    Background="White"
+                    Margin="5"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"/>
+        </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>
