@@ -4,7 +4,6 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo Description | Code | 
 |------|---|
-
 | [Signature Editor](#signature-editor) | [src/SignatureEditor/](src/SignatureEditor/) |
 | [Custom Chart Legend](#custom-chart-legend) | [src/ScatterWithLegend/](src/ScatterWithLegend/) |
 | [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
