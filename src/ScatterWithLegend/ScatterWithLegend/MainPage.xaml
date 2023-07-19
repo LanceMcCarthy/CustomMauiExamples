@@ -38,6 +38,8 @@
                                               StrokeColor="#4FB6E7" />
                         <telerik:PaletteEntry FillColor="#A666CE"
                                               StrokeColor="#A666CE" />
+                        <telerik:PaletteEntry FillColor="#9DCC00"
+                                              StrokeColor="#9DCC00" />
                     </telerik:ChartPalette.Entries>
                 </telerik:ChartPalette>
             </telerik:RadCartesianChart.Palette>
@@ -52,15 +54,16 @@
                            Margin="5"
                            HorizontalOptions="End"
                            VerticalOptions="Start">
-            <telerik:RadItemsControl x:Name="LegendItemsControl"
-                                     Grid.Row="1">
+            <telerik:RadItemsControl x:Name="LegendItemsControl">
                 <telerik:RadItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="local:LegendItem">
                         <HorizontalStackLayout Padding="5"
                                                Spacing="5">
-                            <telerik:RadBorder BackgroundColor="{Binding SeriesColor}"
-                                               WidthRequest="20"
-                                               HeightRequest="20" />
+                            <CheckBox Color="{Binding SeriesColor}"
+                                      IsChecked="{Binding IsSelected}"
+                                      CheckedChanged="CheckBox_OnCheckedChanged"
+                                      WidthRequest="40"
+                                      HeightRequest="40" />
                             <Label Text="{Binding SeriesDisplayName}"
                                    FontSize="12"
                                    VerticalOptions="Center"
