@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:local="using:TabHeaderNotification"
+             x:Class="TabHeaderNotification.MainPage"
+             x:DataType="local:MainViewModel"
+             x:Name="ThisPage">
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="MyHeaderItemControlTemplate">
+            <Grid ColumnDefinitions="*,Auto"
+                  Padding="2">
+                <!-- Original TabViewHeaderItem_ControlTemplate -->
+                <telerik:RadBorder BackgroundColor="{TemplateBinding BackgroundColor}"
+                                   BorderColor="{TemplateBinding BorderColor}"
+                                   BorderThickness="2,0,0,0"
+                                   CornerRadius="{TemplateBinding CornerRadius}"
+                                   Padding="{TemplateBinding ContentPadding}"
+                                   Content="{TemplateBinding Content}" />
+
+
+                <!-- Custom content -->
+                <Grid BindingContext="{TemplateBinding}"
+                      Grid.Column="1">
+                    <Label Text="{Binding BindingContext.NotificationCount, Source={x:Reference ThisPage}}"
+                           PropertyChanged="NotificationLabel_PropertyChanged"
+                           IsVisible="False"
+                           Margin="5,0,0,0"/>
+                </Grid>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.Resources>
+
+    <telerik:RadTabView x:Name="tabView"
+                        HeaderItemTemplate="{StaticResource MyHeaderItemControlTemplate}">
+        <telerik:TabViewItem HeaderText="Home">
+            <telerik:TabViewItem.ImageSource>
+                <FontImageSource Glyph="&#xe85b;"
+                                 FontFamily="telerikfontexamples"
+                                 Color="Black"
+                                 Size="36" />
+            </telerik:TabViewItem.ImageSource>
+            <Grid BindingContext="{Binding BindingContext, Source={x:Reference ThisPage}}">
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="10">
+                    <Label Text="Home tab" />
+                    <Button Text="Increase Notification Count"
+                            Command="{Binding IncreaseNotificationCountCommand}" />
+                    <Button Text="Clear Notification Count"
+                            Command="{Binding ClearNotificationCountCommand}" />
+                </VerticalStackLayout>
+            </Grid>
+        </telerik:TabViewItem>
+
+        <telerik:TabViewItem HeaderText="Folder">
+            <telerik:TabViewItem.ImageSource>
+                <FontImageSource Glyph="&#xe82a;"
+                                 FontFamily="telerikfontexamples"
+                                 Color="Black"
+                                 Size="36" />
+            </telerik:TabViewItem.ImageSource>
+            <Grid>
+                <Label Text="Folder tab"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+            </Grid>
+        </telerik:TabViewItem>
+
+        <telerik:TabViewItem HeaderText="Settings">
+            <telerik:TabViewItem.ImageSource>
+                <FontImageSource Glyph="&#xe822;"
+                                 FontFamily="telerikfontexamples"
+                                 Color="Black"
+                                 Size="36" />
+            </telerik:TabViewItem.ImageSource>
+            <Grid>
+                <Label Text="Folder tab"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+            </Grid>
+        </telerik:TabViewItem>
+    </telerik:RadTabView>
+
+</ContentPage>

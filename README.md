@@ -4,6 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo Description | Code | 
 |------|---|
+| [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
 | [Signature Editor](#signature-editor) | [src/SignatureEditor/](src/SignatureEditor/) |
 | [Custom Chart Legend](#custom-chart-legend) | [src/ScatterWithLegend/](src/ScatterWithLegend/) |
 | [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
@@ -14,6 +15,12 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## TabView Header Notification Badge
+
+This demo uses conditional logic, with a custom HeaderItem `ControlTemplate` to only show notification badges on specific tab headers. This is accomplished by combining information from both the `TabViewHeaderItem` context and the `Label.Text` value to determine if the Label should be visible for that specific tab.
+
+![image](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/767b61fe-26c6-4f24-ad8e-c93947d04296)
 
 ## Signature Editor
 
