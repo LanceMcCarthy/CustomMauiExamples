@@ -5,6 +5,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | Demo Description | Code | 
 |------|---|
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
+| [Popup Service](#popup-service) | [src/PopupServiceDemo/](src/PopupServiceDemo/) |
 | [Signature Editor](#signature-editor) | [src/SignatureEditor/](src/SignatureEditor/) |
 | [Custom Chart Legend](#custom-chart-legend) | [src/ScatterWithLegend/](src/ScatterWithLegend/) |
 | [Printing Demo](#printing) | [src/DocumentPrinting/](src/DocumentPrinting/) |
@@ -21,6 +22,37 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 This demo uses conditional logic, with a custom HeaderItem `ControlTemplate` to only show notification badges on specific tab headers. This is accomplished by combining information from both the `TabViewHeaderItem` context and the `Label.Text` value to determine if the Label should be visible for that specific tab.
 
 ![image](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/767b61fe-26c6-4f24-ad8e-c93947d04296)
+
+## Popup Service
+
+This example uses .NET MAUI's new DependencyInjection system to register a popup service that can be used anywhere in the app. [Please visit the README](src/PopupServiceDemo/) for information on how it works.
+
+As a sneak peek, here is the service being used in a view model.
+
+```csharp
+public class HomeViewModel
+{
+    private readonly PopupService popupService;
+
+    public HomeViewModel(PopupService service)
+    {
+        this.popupService = service;
+        
+        OpenPopupCommand = new Command(OpenPopup);
+    }
+
+    public Command OpenPopupCommand { get; set; }
+
+    private void OpenPopup()
+    {
+        var popupContent = CreatePopupContent();
+        
+        // ***** Open the popup ***** //
+        popupService.OpenPopup(popupContent);
+    }
+    ...
+}
+```
 
 ## Signature Editor
 
