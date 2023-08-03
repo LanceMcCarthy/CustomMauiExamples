@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net6.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -49,12 +49,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\telerikfontexamples.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="CommonHelpers" Version="1.2.0" />
-	  <PackageReference Include="Telerik.UI.for.Maui" Version="2.3.0" />
+	  <PackageReference Include="CommonHelpers" Version="*" />
+	  <PackageReference Include="Telerik.UI.for.Maui" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -62,13 +58,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Primitives\FloatingLabel.xaml">
+	  <Compile Update="Primitives\LabeledCheckBox.xaml.cs">
+	    <DependentUpon>LabeledCheckBox.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Primitives\LabeledCheckBox.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AsyncTemplateCellDemoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\FloatingLabelDemoPage.xaml">
+	  <MauiXaml Update="Views\LabeledCheckBoxDemoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
