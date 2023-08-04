@@ -48,9 +48,4 @@ public partial class LabeledCheckBox : ContentView
             self.PART_Label.Text = (string)newValue;
         }
     }
-    
-    private void OnLabelTapped(object sender, EventArgs e)
-    {
-        PART_CheckBox.IsChecked = !PART_CheckBox.IsChecked;
-    }
 }

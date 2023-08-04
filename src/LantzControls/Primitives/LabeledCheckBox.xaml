@@ -8,11 +8,13 @@
         <telerik:RadCheckBox x:Name="PART_CheckBox" 
                              VerticalOptions="Center"/>
         <Label x:Name="PART_Label" 
+               telerik:RadCheckBox.ToggleOnTap="{Reference PART_CheckBox}"
                VerticalOptions="Center">
+            <!--This is no longer needed
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnLabelTapped"
                                       NumberOfTapsRequired="1" />
-            </Label.GestureRecognizers>
+            </Label.GestureRecognizers>-->
         </Label>
     </HorizontalStackLayout>
 </ContentView>
