@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="LantzControls.Data.DataGrid.ColumnChooser">
+    <telerik:RadItemsControl x:Name="PART_Chooser">
+        <telerik:RadItemsControl.ItemTemplate>
+            <DataTemplate>
+                <HorizontalStackLayout Margin="10"
+                                       Spacing="10"
+                                       Padding="10">
+                    <telerik:RadCheckBox IsChecked="{Binding IsChecked}"
+                                         IsCheckedChanged="RadCheckBox_OnIsCheckedChanged"/>
+                    <Label Text="{Binding ColumnHeaderText}"
+                           TextColor="#99000000"
+                           FontSize="12"/>
+                </HorizontalStackLayout>
+            </DataTemplate>
+        </telerik:RadItemsControl.ItemTemplate>
+    </telerik:RadItemsControl>
+</ContentView>
