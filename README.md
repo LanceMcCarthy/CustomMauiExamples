@@ -2,8 +2,8 @@
 
 This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](https://github.com/LanceMcCarthy/CustomXamarinDemos), but strictly for .NET MAUI applications. This is where you will find helpful implementations of edge-case scenarios that fall outside the [scope of support](https://www.telerik.com/account/support-center/scope).
 
-| Demo Description | Code | 
-|------|---|
+| Demo | Code |
+|------|------|
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
 | [Popup Service](#popup-service) | [src/PopupServiceDemo/](src/PopupServiceDemo/) |
 | [Signature Editor](#signature-editor) | [src/SignatureEditor/](src/SignatureEditor/) |
@@ -13,7 +13,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
-| [Custom Controls](#lantz-controls) | [src/LantzControls](src/LantzControls) |
+| [Custom Controls](#lantz-controls) => `ColumnChooser`, `LabeledCheckBox`, `FloatingLabel` | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
@@ -125,9 +125,13 @@ Please refer to [Microsoft gRPC documentation](https://docs.microsoft.com/en-us/
 
 ## Lantz Controls
 
-This is project that has various custom controls and will evolve over time as I add more. Currently, there is only a `FloatingLabel` control ([Jump to code](src/LantzControls/)).
+This is project that has various custom controls and will evolve over time as I add more ([Jump to code](src/LantzControls/)).
 
-#### FloatingLabel
+-  `FloatingLabel`
+-  `LabeledCheckBox`
+-  `ColumnChooser` 
+
+### FloatingLabel
 
 Unfocused with RadEntry
 
@@ -140,6 +144,31 @@ Focused with RadEntry
 Focused with RadEntry and Text Content
 
 ![focused filled](https://user-images.githubusercontent.com/3520532/185198803-baaa19cc-ac66-4a21-9b5b-c85936d1e7e4.png)
+
+### ColumnChooser
+
+Can be attached to any `RadDataGrid` to allow the app user to show/hide any column.
+
+![image](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/082bda3f-6828-4669-b0f6-43fbb5e75579)
+
+```xaml
+<Grid ColumnDefinitions="*, Auto">
+    <telerik:RadDataGrid x:Name="MyDataGrid"
+                         AutoGenerateColumns="False">
+        <telerik:RadDataGrid.Columns>
+            <telerik:DataGridTextColumn PropertyName="Name" HeaderText="Name" />
+            <telerik:DataGridNumericalColumn PropertyName="Age" HeaderText="Age" />
+            <telerik:DataGridDateColumn PropertyName="DateOfBirth" HeaderText="DOB" CellContentFormat="{}{0:MM/dd/yyyy}" />
+        </telerik:RadDataGrid.Columns>
+    </telerik:RadDataGrid>
+
+    <!-- Associate with a DataGrid -->
+    <dataGrid:ColumnChooser x:Name="Chooser"
+                            AssociatedDataGrid="{x:Reference MyDataGrid}"
+                            Margin="20"
+                            Grid.Column="1" />
+</Grid>
+```
 
 ## FlyoutPage Navigation
 

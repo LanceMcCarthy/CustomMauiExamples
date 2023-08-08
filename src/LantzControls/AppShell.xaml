@@ -6,6 +6,10 @@
        Shell.FlyoutBehavior="Flyout"
        Shell.NavBarIsVisible="True">
 
+    <ShellContent Title="DataGrid ColumnChooser"
+                  ContentTemplate="{DataTemplate views:DataGridColumnChooserDemoPage}"
+                  Route="ColumnChooser" />
+
     <ShellContent Title="FloatingLabel"
                   ContentTemplate="{DataTemplate views:FloatingLabelDemoPage}"
                   Route="FloatingLabelDemoPage" />

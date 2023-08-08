@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LantzControls.Views.DataGridColumnChooserDemoPage"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:dataGrid="clr-namespace:LantzControls.Data.DataGrid"
+             Title="DataGridColumnChooserDemoPage">
+    <Grid ColumnDefinitions="*, Auto">
+        <telerik:RadDataGrid x:Name="MyDataGrid"
+                             AutoGenerateColumns="False">
+            <telerik:RadDataGrid.Columns>
+                <telerik:DataGridTextColumn PropertyName="Name"
+                                            HeaderText="Name" />
+                <telerik:DataGridNumericalColumn PropertyName="Age"
+                                                 HeaderText="Age" />
+                <telerik:DataGridDateColumn PropertyName="DateOfBirth"
+                                            HeaderText="DOB"
+                                            CellContentFormat="{}{0:MM/dd/yyyy}" />
+            </telerik:RadDataGrid.Columns>
+        </telerik:RadDataGrid>
+
+        <dataGrid:ColumnChooser x:Name="Chooser"
+                                AssociatedDataGrid="{x:Reference MyDataGrid}"
+                                Margin="20"
+                                WidthRequest="150"
+                                Grid.Column="1" />
+    </Grid>
+</ContentPage>
