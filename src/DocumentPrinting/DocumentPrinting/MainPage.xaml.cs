@@ -11,18 +11,20 @@ public partial class MainPage : ContentPage
 	}
 
 	private async void PrintPdf_OnClicked(object sender, EventArgs e)
-	{
-        var stream = await FileSystem.OpenAppPackageFileAsync("pdfviewer-overview.pdf");
-
+    {
+        var fileName = "pdfviewer-overview.pdf";
+        var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
         var helper = new PrintHelper();
 
 #if WINDOWS
-        
-        helper.Print(stream, "pdfviewer-overview.pdf", this.Window.Handler.PlatformView as Microsoft.UI.Xaml.Window);
+        helper.Print(stream, fileName, this.Window.Handler.PlatformView as Microsoft.UI.Xaml.Window);
 
-#elif __IOS__ || MACCATALYST || ANDROID
+#elif ANDROID
+		await helper.PrintAsync(stream, fileName);
 
-		helper.Print(stream, "pdfviewer-overview.pdf");
+#elif __IOS__ || MACCATALYST
+		helper.Print(stream, fileName);
+
 #endif
     }
 	

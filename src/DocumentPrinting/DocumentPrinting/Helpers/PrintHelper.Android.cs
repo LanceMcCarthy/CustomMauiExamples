@@ -1,19 +1,49 @@
 ﻿#if ANDROID
+using Android.Content;
 using Android.OS;
 using Android.Print;
 using Java.IO;
-using FileNotFoundException = Java.IO.FileNotFoundException;
-using IOException = Java.IO.IOException;
 
 namespace DocumentPrinting.Helpers;
 
-public class PrintHelper : PrintDocumentAdapter
+public class PrintHelper
 {
-    public string FileToPrint { get; set; }
-    
-    public PrintHelper(string fileDesc)
+    // Credit goes to https://github.com/Cywizz for abstracting this into a more user-friendly manner.
+
+    public Task PrintAsync(Stream fileStream, string fileName)
     {
-        FileToPrint = fileDesc;
+        if (fileStream.CanSeek)
+            fileStream.Position = 0;
+
+        string createdFilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), fileName);
+
+        //Save the stream to the created file
+        using (var dest = System.IO.File.OpenWrite(createdFilePath))
+        {
+            fileStream.CopyTo(dest);
+        }
+
+        if (Platform.CurrentActivity == null)
+            return Task.FromException<long>(new Exception("The CurrentActivity is null."));
+
+        var printManager = (PrintManager)Platform.CurrentActivity.GetSystemService(Context.PrintService);
+
+        // Now we can use the preexisting print helper class
+        var utility = new PrintUtility(createdFilePath);
+
+        printManager?.Print(createdFilePath, utility, null);
+
+        return Task.CompletedTask;
+    }
+}
+
+public class PrintUtility : PrintDocumentAdapter
+{
+    public string PrintFileName { get; set; }
+
+    public PrintUtility(string printFileName)
+    {
+        PrintFileName = printFileName;
     }
 
     public override void OnLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes, CancellationSignal cancellationSignal, LayoutResultCallback callback, Bundle extras)
@@ -23,8 +53,8 @@ public class PrintHelper : PrintDocumentAdapter
             callback.OnLayoutCancelled();
             return;
         }
-        
-        var pdi = new PrintDocumentInfo.Builder(FileToPrint).SetContentType(Android.Print.PrintContentType.Document).Build();
+
+        var pdi = new PrintDocumentInfo.Builder(PrintFileName).SetContentType(PrintContentType.Document).Build();
 
         callback.OnLayoutFinished(pdi, true);
     }
@@ -36,7 +66,7 @@ public class PrintHelper : PrintDocumentAdapter
 
         try
         {
-            input = new FileInputStream(FileToPrint);
+            input = new FileInputStream(PrintFileName);
             output = new FileOutputStream(destination.FileDescriptor);
 
             var buf = new byte[1024];
@@ -50,7 +80,7 @@ public class PrintHelper : PrintDocumentAdapter
             callback.OnWriteFinished(new[] { PageRange.AllPages });
 
         }
-        catch (FileNotFoundException ee)
+        catch (Java.IO.FileNotFoundException ee)
         {
             //Catch
         }
@@ -65,7 +95,7 @@ public class PrintHelper : PrintDocumentAdapter
                 input?.Close();
                 output?.Close();
             }
-            catch (IOException e)
+            catch (Java.IO.IOException e)
             {
                 e.PrintStackTrace();
             }
