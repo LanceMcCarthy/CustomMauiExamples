@@ -187,7 +187,7 @@ public class PrintHelper
             print.Width = marginWidth;
             print.Height = marginHeight;
 
-            this.PrintPreviewPages.Add(i, print);
+            this.PrintPreviewPages.TryAdd(i, print);
         }
     }
 
