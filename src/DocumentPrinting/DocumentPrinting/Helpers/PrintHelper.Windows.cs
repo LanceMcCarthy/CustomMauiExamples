@@ -54,17 +54,17 @@ public class PrintHelper
         result = global::Windows.Data.Pdf.PdfDocument.LoadFromStreamAsync(randomStream);
 
         result.AsTask().Wait();
-        pdfDocument = result.GetResults();
+        this.pdfDocument = result.GetResults();
         result = null;
-        pageCount = (int)pdfDocument.PageCount;
+        pageCount = (int)this.pdfDocument.PageCount;
         
         try
         {
             UIDispatcher.Execute(async () =>
             {
-                await IncludeCanvas();
+                await this.IncludeCanvas();
 
-                RegisterForPrint();
+                this.RegisterForPrint();
 
                 await PrintManagerInterop.ShowPrintUIForWindowAsync(hWnd);
             });
@@ -73,7 +73,7 @@ public class PrintHelper
         {
             UIDispatcher.Execute(async () =>
             {
-                RegisterForPrint();
+                this.RegisterForPrint();
                 
                 await PrintManagerInterop.ShowPrintUIForWindowAsync(hWnd);
             });
@@ -118,7 +118,7 @@ public class PrintHelper
     {
         try
         {
-            await PrepareForPrint(0, pageCount);
+            await this.PrepareForPrint(0, pageCount);
             var printDoc = (PrintDocument)sender;
             printDoc.AddPagesComplete();
         }
@@ -131,7 +131,7 @@ public class PrintHelper
     private async Task<int> PrepareForPrint(int startIndex, int count)
     {
         var tempFolder = ApplicationData.Current.TemporaryFolder;
-        var result = await PrepareForPrint(startIndex, count, tempFolder);
+        var result = await this.PrepareForPrint(startIndex, count, tempFolder);
         tempFolder = null;
         return result;
     }
@@ -141,7 +141,7 @@ public class PrintHelper
         for (var i = p; i < count; i++)
         {
             ApplicationLanguages.PrimaryLanguageOverride = CultureInfo.InvariantCulture.TwoLetterISOLanguageName;
-            var pdfPage = pdfDocument.GetPage(uint.Parse(i.ToString()));
+            var pdfPage = this.pdfDocument.GetPage(uint.Parse(i.ToString()));
             double pdfPagePreferredZoom = pdfPage.PreferredZoom;
             IRandomAccessStream randomStream = new InMemoryRandomAccessStream();
             var pdfPageRenderOptions = new Windows.Data.Pdf.PdfPageRenderOptions();
@@ -170,7 +170,7 @@ public class PrintHelper
         var pageDescription = printingOptions.GetPageDescription((uint)e.CurrentPreviewPageNumber);
         marginWidth = pageDescription.PageSize.Width;
         marginHeight = pageDescription.PageSize.Height;
-        AddOnePrintPreviewPage();
+        this.AddOnePrintPreviewPage();
 
         var printDoc = (PrintDocument)sender;
         printDoc.SetPreviewPageCount(pageCount, PreviewPageCountType.Final);
@@ -186,15 +186,16 @@ public class PrintHelper
 
             print.Width = marginWidth;
             print.Height = marginHeight;
-            PrintPreviewPages.Add(i, print);
+
+            this.PrintPreviewPages.TryAdd(i, print);
         }
     }
 
     private void GetPrintPreviewPage(object sender, GetPreviewPageEventArgs e)
     {
         var printDoc = (PrintDocument)sender;
-        pdfDocumentPanel.Children.Remove(PrintPreviewPages[e.PageNumber - 1]);
-        printDoc.SetPreviewPage(e.PageNumber, PrintPreviewPages[e.PageNumber - 1]);
+        pdfDocumentPanel.Children.Remove(this.PrintPreviewPages[e.PageNumber - 1]);
+        printDoc.SetPreviewPage(e.PageNumber, this.PrintPreviewPages[e.PageNumber - 1]);
     }
 
     private async Task<int> IncludeCanvas()
@@ -202,7 +203,7 @@ public class PrintHelper
         for (var i = 0; i < pageCount; i++)
         {
             var pageIndex = i;
-            var pdfPage = pdfDocument.GetPage(uint.Parse(i.ToString()));
+            var pdfPage = this.pdfDocument.GetPage(uint.Parse(i.ToString()));
             var width = pdfPage.Size.Width;
             var height = pdfPage.Size.Height;
             var page = new Canvas();
