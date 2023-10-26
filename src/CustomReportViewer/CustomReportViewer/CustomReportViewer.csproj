@@ -25,6 +25,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<DefaultLanguage>en-us</DefaultLanguage>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -50,11 +51,11 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
-		<PackageReference Include="PInvoke.User32" Version="0.7.104" />
-		<PackageReference Include="Telerik.WinUI.Controls" Version="2.6.0" />
-		<PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="17.1.23.606" />
-		<PackageReference Include="Telerik.ReportViewer.WinUI" Version="17.1.23.606" />
-		<PackageReference Include="Telerik.Reporting.Services.HttpClient" Version="17.1.23.606" />
+		<PackageReference Include="PInvoke.User32" Version="0.7.124" />
+		<PackageReference Include="Telerik.WinUI.Controls" Version="2.8.0" />
+		<PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="17.2.23.1010" />
+		<PackageReference Include="Telerik.ReportViewer.WinUI" Version="17.2.23.1010" />
+		<PackageReference Include="Telerik.Reporting.Services.HttpClient" Version="17.2.23.1010" />
 		<PackageReference Include="WinUIEx" Version="1.8.0" />
 		<FrameworkReference Include="Microsoft.WindowsDesktop.App.Wpf" />
 	</ItemGroup>
