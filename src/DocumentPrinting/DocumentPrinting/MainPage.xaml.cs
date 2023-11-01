@@ -12,6 +12,8 @@ public partial class MainPage : ContentPage
 
 	private async void PrintPdf_OnClicked(object sender, EventArgs e)
     {
+        (sender as Button).IsEnabled = false;
+
         var fileName = "pdfviewer-overview.pdf";
         var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
         var helper = new PrintHelper();
@@ -26,6 +28,8 @@ public partial class MainPage : ContentPage
 		helper.Print(stream, fileName);
 
 #endif
+
+        (sender as Button).IsEnabled = true;
     }
 	
 }
