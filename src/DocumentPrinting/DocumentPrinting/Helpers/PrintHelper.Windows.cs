@@ -1,4 +1,5 @@
 ﻿#if WINDOWS
+using System.Diagnostics;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Printing;
@@ -51,13 +52,18 @@ public class PrintHelper
         this.sourcePdfDocument = await PdfDocument.LoadFromStreamAsync(ras);
 
         this.pageCount = (int)this.sourcePdfDocument.PageCount;
-        
+
+        // If we have UI thread access, we will use a Canvas
+        // If there is no UI thread access, and exception will be thrown and we instead print without a canvas
         try
         {
+            
             await PrintWithCanvas();
         }
         catch
         {
+            Debug.WriteLine("No UI thread available, printing without Canvas.");
+
             await PrintWithoutCanvas();
         }
     }
@@ -112,16 +118,13 @@ public class PrintHelper
 
             using var pdfPage = this.sourcePdfDocument.GetPage(uint.Parse(i.ToString()));
 
-            double pdfPagePreferredZoom = pdfPage.PreferredZoom;
-
             using var ras = new InMemoryRandomAccessStream();
 
-            var pdfPageRenderOptions = new PdfPageRenderOptions();
-            var pdfPageSize = pdfPage.Size;
-            pdfPageRenderOptions.DestinationHeight = (uint)(pdfPageSize.Height * pdfPagePreferredZoom);
-            pdfPageRenderOptions.DestinationWidth = (uint)(pdfPageSize.Width * pdfPagePreferredZoom);
-
-            await pdfPage.RenderToStreamAsync(ras, pdfPageRenderOptions);
+            await pdfPage.RenderToStreamAsync(ras, new PdfPageRenderOptions
+            {
+                DestinationWidth = (uint)(pdfPage.Size.Width * pdfPage.PreferredZoom),
+                DestinationHeight = (uint)(pdfPage.Size.Height * pdfPage.PreferredZoom)
+            });
 
             var imageCtrl = new Image();
             var src = new BitmapImage();
@@ -129,8 +132,16 @@ public class PrintHelper
             src.SetSource(ras);
             imageCtrl.Source = src;
 
-            imageCtrl.Height = src.PixelHeight / DeviceDisplay.Current.MainDisplayInfo.Density;
-            imageCtrl.Width = src.PixelWidth / DeviceDisplay.Current.MainDisplayInfo.Density;
+            // ***** Option 1 ***** //
+            // Use Bitmap's pixel dimensions
+            imageCtrl.Height = src.PixelHeight / DeviceDisplay.Current.MainDisplayInfo.Density; 
+            imageCtrl.Width = src.PixelWidth / DeviceDisplay.Current.MainDisplayInfo.Density; 
+
+            // ***** Option 2 ***** //
+            // Use the PDF's dimensions to size the page contents
+            // Note, this may be smaller, so further tweaking to PdfPageRenderOptions may be needed
+            //imageCtrl.Height = pdfPage.Size.Width;
+            //imageCtrl.Width = pdfPage.Size.Height;
 
             printDocument.AddPage(imageCtrl);
         }
@@ -140,44 +151,47 @@ public class PrintHelper
     {
         for (var i = 0; i < pageCount; i++)
         {
-            using var pdfPage = this.sourcePdfDocument.GetPage((uint)i);
-            var width = pdfPage.Size.Width;
-            var height = pdfPage.Size.Height;
+            using var pdfPage = this.sourcePdfDocument.GetPage(uint.Parse(i.ToString()));
 
-            var page = new Canvas
+            using var ras = new InMemoryRandomAccessStream();
+
+            await pdfPage.RenderToStreamAsync(ras, new PdfPageRenderOptions
             {
-                Width = width,
-                Height = height,
+                DestinationWidth = (uint)(pdfPage.Size.Width * pdfPage.PreferredZoom),
+                DestinationHeight = (uint)(pdfPage.Size.Height * pdfPage.PreferredZoom)
+            });
+
+            var imageCtrl = new Image();
+            var src = new BitmapImage();
+            ras.Seek(0);
+            src.SetSource(ras);
+            imageCtrl.Source = src;
+
+            // ***** Option 1 ***** //
+            // Use Bitmap's pixel dimensions
+            imageCtrl.Height = src.PixelHeight / DeviceDisplay.Current.MainDisplayInfo.Density; 
+            imageCtrl.Width = src.PixelWidth / DeviceDisplay.Current.MainDisplayInfo.Density; 
+
+            // ***** Option 2 ***** //
+            // Use the PDF's dimensions to size the page contents
+            // Note, this may be smaller, so further tweaking to PdfPageRenderOptions may be needed
+            //imageCtrl.Height = pdfPage.Size.Width;
+            //imageCtrl.Width = pdfPage.Size.Height;
+
+            // Use a canvas behind the image control
+            var pageCanvas = new Canvas
+            {
+                Width = pdfPage.Size.Width,
+                Height = pdfPage.Size.Height,
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),
                 Margin = new Thickness(0, 0, 0, 0)
             };
 
-            double pdfPagePreferredZoom = pdfPage.PreferredZoom;
+            pageCanvas.Children.Add(imageCtrl);
 
-            using var ras = new InMemoryRandomAccessStream();
-
-            var pdfPageRenderOptions = new PdfPageRenderOptions();
-            var pdfPageSize = pdfPage.Size;
-            pdfPageRenderOptions.DestinationHeight = (uint)(pdfPageSize.Height * pdfPagePreferredZoom);
-            pdfPageRenderOptions.DestinationWidth = (uint)(pdfPageSize.Width * pdfPagePreferredZoom);
-
-            await pdfPage.RenderToStreamAsync(ras, pdfPageRenderOptions);
-
-            ras.Seek(0);
-
-            var imageCtrl = new Image();
-            var src = new BitmapImage();
-            src.SetSource(ras);
-            imageCtrl.Source = src;
-            
-            // We can now use the MAUI display info
-            imageCtrl.Height = src.PixelHeight / DeviceDisplay.Current.MainDisplayInfo.Density;
-            imageCtrl.Width = src.PixelWidth / DeviceDisplay.Current.MainDisplayInfo.Density;
-
-            page.Children.Add(imageCtrl);
-            pdfDocumentPanel.Children.Add(page);
+            pdfDocumentPanel.Children.Add(pageCanvas);
         }
     }
 
