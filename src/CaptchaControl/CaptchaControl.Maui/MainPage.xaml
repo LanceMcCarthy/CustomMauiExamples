@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:local="clr-namespace:CaptchaControl.Maui"
+             x:Class="CaptchaControl.Maui.MainPage">
+
+    <Grid BackgroundColor="Gray">
+        <HorizontalStackLayout Spacing="10"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center">
+            <GraphicsView x:Name="CaptchaGraphicsView"
+                          WidthRequest="400"
+                          HeightRequest="300"
+                          BackgroundColor="White">
+                <GraphicsView.Drawable>
+                    <local:CaptchaDrawable Width="400" 
+                                           Height="300" />
+                </GraphicsView.Drawable>
+            </GraphicsView>
+
+            <telerik:RadButton x:Name="DrawCaptchaButton"
+                            Text="🔃"
+                            Clicked="DrawButton_Clicked"
+                            VerticalOptions="End"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
