@@ -10,12 +10,12 @@
                                VerticalOptions="Center"
                                HorizontalOptions="Center">
             <GraphicsView x:Name="CaptchaGraphicsView"
-                          WidthRequest="400"
-                          HeightRequest="300"
+                          WidthRequest="150"
+                          HeightRequest="75"
                           BackgroundColor="White">
                 <GraphicsView.Drawable>
-                    <local:CaptchaDrawable Width="400" 
-                                           Height="300" />
+                    <local:CaptchaDrawable Width="150" 
+                                           Height="75" />
                 </GraphicsView.Drawable>
             </GraphicsView>
 
