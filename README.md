@@ -5,6 +5,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | Demo | Code |
 |------|------|
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
+| [Captcha Control](#captcha-control) | [src/CaptchaControl/](src/CaptchaControl/) |
 | [Popup Service](#popup-service) | [src/PopupServiceDemo/](src/PopupServiceDemo/) |
 | [Signature Editor](#signature-editor) | [src/SignatureEditor/](src/SignatureEditor/) |
 | [Custom Chart Legend](#custom-chart-legend) | [src/ScatterWithLegend/](src/ScatterWithLegend/) |
@@ -22,6 +23,14 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 This demo uses conditional logic, with a custom HeaderItem `ControlTemplate` to only show notification badges on specific tab headers. This is accomplished by combining information from both the `TabViewHeaderItem` context and the `Label.Text` value to determine if the Label should be visible for that specific tab.
 
 ![image](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/767b61fe-26c6-4f24-ad8e-c93947d04296)
+
+## Captcha Control
+
+Create a custom CAPTCHA control using using multiple fonts and colors using .NET MAUI's `CanvasView` to render different random characters with AttributedText and the `DrawText` method. 
+
+![captcha](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/2ff1f558-199f-49d6-8991-0748680a59a5)
+
+Visit [Microsoft's 'draw attributed text' documentation example](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/draw#draw-attributed-text) to learn more.
 
 ## Popup Service
 
