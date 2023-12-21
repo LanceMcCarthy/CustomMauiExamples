@@ -6,8 +6,6 @@ public partial class LabeledCheckBox : ContentView
     {
         InitializeComponent();
     }
-
-    public event EventHandler<CheckedChangedEventArgs> CheckedChanged;
     
     public bool IsChecked
     {
@@ -49,10 +47,5 @@ public partial class LabeledCheckBox : ContentView
         {
             self.PART_Label.Text = (string)newValue;
         }
-    }
-
-    private void PART_CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        CheckedChanged?.Invoke(this, e);
     }
 }
