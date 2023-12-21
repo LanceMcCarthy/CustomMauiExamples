@@ -5,7 +5,8 @@
              x:Class="LantzControls.Primitives.LabeledCheckBox">
     <HorizontalStackLayout Spacing="10"
                            Padding="10">
-        <telerik:RadCheckBox x:Name="PART_CheckBox" 
+        <telerik:RadCheckBox x:Name="PART_CheckBox"
+                             CheckedChanged="PART_CheckBox_CheckedChanged"
                              VerticalOptions="Center"/>
         <Label x:Name="PART_Label" 
                telerik:RadCheckBox.ToggleOnTap="{Reference PART_CheckBox}"
