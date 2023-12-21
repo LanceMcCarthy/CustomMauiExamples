@@ -39,4 +39,4 @@ public class MyLiveDataItem : NotifyPropertyChangedBase
         get => isFetchingData;
         set => UpdateValue(ref isFetchingData, value);
     }
-} 
+}

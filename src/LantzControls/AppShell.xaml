@@ -22,4 +22,8 @@
                   ContentTemplate="{DataTemplate views:AsyncTemplateCellDemoPage}"
                   Route="AsyncTemplateCellDemoPage" />
 
+    <ShellContent Title="SelectAllComboBox"
+                  ContentTemplate="{DataTemplate views:SelectAllComboBoxDemoPage}"
+                  Route="SelectAllComboBoxDemoPage" />
+
 </Shell>

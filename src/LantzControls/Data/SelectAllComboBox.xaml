@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="LantzControls.Data.SelectAllComboBox">
+    <Grid>
+        <VerticalStackLayout Padding="10"
+                             Spacing="5">
+            <HorizontalStackLayout Spacing="5">
+                <CheckBox x:Name="SelectAllCheckBox"
+                          CheckedChanged="SelectAllCheckBox_OnCheckedChanged" />
+                <Label Text="Select All"/>
+            </HorizontalStackLayout>
+
+            <telerik:RadComboBox x:Name="ComboBox1"
+                                 DisplayMemberPath="Name"
+                                 SelectionMode="Multiple"
+                                 SelectionChanged="ComboBox1_OnSelectionChanged">
+                <telerik:RadComboBox.TokenTemplate>
+                    <DataTemplate>
+                        <telerik:RadBorder BackgroundColor="LightBlue"
+                                           CornerRadius="10"
+                                           Margin="2">
+                            <HorizontalStackLayout Margin="3">
+                                <Label Text="{Binding Name}"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"
+                                       Margin="2" />
+                                <Label FontFamily="telerikfontexamples"
+                                       Text="&#xE80A;"
+                                       FontSize="10"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       Margin="2">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </HorizontalStackLayout>
+                        </telerik:RadBorder>
+                    </DataTemplate>
+                </telerik:RadComboBox.TokenTemplate>
+                <telerik:RadComboBox.ShowMoreTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Path=., StringFormat='+{0} more items'}"
+                               VerticalTextAlignment="Center" />
+                    </DataTemplate>
+                </telerik:RadComboBox.ShowMoreTemplate>
+            </telerik:RadComboBox>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>
