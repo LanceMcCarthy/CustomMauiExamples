@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatDataSources.Maui", "ChatDataSources.Maui\ChatDataSources.Maui.csproj", "{30E016A8-E19F-4127-A1B6-D94C4754E7C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E016A8-E19F-4127-A1B6-D94C4754E7C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE956701-AE59-4D20-B625-9A839607DE01}
+	EndGlobalSection
+EndGlobal

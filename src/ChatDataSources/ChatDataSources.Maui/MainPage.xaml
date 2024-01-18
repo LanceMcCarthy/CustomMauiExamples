@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:converters="using:ChatDataSources.Maui.Converters"
+             x:Class="ChatDataSources.Maui.MainPage">
+
+    <ContentPage.Resources>
+        <converters:SimpleChatItemConverter x:Key="SimpleChatItemConverter" />
+    </ContentPage.Resources>
+
+    <telerik:RadChat x:Name="chat" 
+                     Author="{Binding Me}"
+                     ItemsSource="{Binding Items}"
+                     ItemConverter="{StaticResource SimpleChatItemConverter}"/>
+</ContentPage>
