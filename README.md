@@ -4,6 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo | Code |
 |------|------|
+| [Chat - Advanced Data Sources](#chat-with-advanced-data-sources) | [src/ChatDataSources/](src/ChatDataSources/) |
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
 | [Captcha Control](#captcha-control) | [src/CaptchaControl/](src/CaptchaControl/) |
 | [Popup Service](#popup-service) | [src/PopupServiceDemo/](src/PopupServiceDemo/) |
@@ -17,6 +18,14 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Custom Controls](#lantz-controls) => `ColumnChooser`, `LabeledCheckBox`, `FloatingLabel` | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## Chat with Advanced Data Sources
+
+This demo contains a RadChat, directly connected to an entityFramework DBcontext.
+
+![chat](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/6e1bbc02-96a2-42ea-b1f5-d2f5ffc05b3c)
+
+> Future plans are to also include SignalR and gRPC service sources.
 
 ## TabView Header Notification Badge
 
