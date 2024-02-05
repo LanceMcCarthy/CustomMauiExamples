@@ -4,6 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo | Code |
 |------|------|
+| [DataGrid - EFCore Demos and LoadOnDemand](#efcore-demos) | [src/ChatDataSources/](src/EFCoreDemos) |
 | [Chat - Advanced Data Sources](#chat-with-advanced-data-sources) | [src/ChatDataSources/](src/ChatDataSources/) |
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
 | [Captcha Control](#captcha-control) | [src/CaptchaControl/](src/CaptchaControl/) |
@@ -18,6 +19,12 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Custom Controls](#lantz-controls) => `ColumnChooser`, `LabeledCheckBox`, `FloatingLabel` | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## EFCore Demos
+
+This project contains DataGrid with automatic load on demand, fetching data from a database using EntityFrameworkCore.
+
+![datagrid and efcore](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/1843f508-6fdb-48de-8b1f-657f0465d051)
 
 ## Chat with Advanced Data Sources
 
