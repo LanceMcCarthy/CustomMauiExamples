@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dataGrid="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="EFCoreDemos.MainPage">
+
+    <Grid>
+        <dataGrid:RadDataGrid x:Name="dataGrid"
+                              ItemsSource="{Binding DataGridStudents}"
+                              AutoGenerateColumns="False"
+                              LoadOnDemandMode="Automatic"
+                              LoadOnDemandBufferItemsCount="10">
+            <dataGrid:RadDataGrid.Columns>
+                <dataGrid:DataGridTextColumn PropertyName="FullName"
+                                             HeaderText="Name" />
+                <dataGrid:DataGridNumericalColumn PropertyName="Grade"
+                                                  HeaderText="Grade" />
+            </dataGrid:RadDataGrid.Columns>
+        </dataGrid:RadDataGrid>
+    </Grid>
+</ContentPage>
