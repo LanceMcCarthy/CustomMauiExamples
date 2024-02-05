@@ -4,7 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo | Code |
 |------|------|
-| [DataGrid - EFCore Demos and LoadOnDemand](#efcore-demos) | [src/ChatDataSources/](src/EFCoreDemos) |
+| [DataGrid - EFCore Demos and LoadOnDemand](#efcore-demos) | [src/EFCoreDemos/](src/EFCoreDemos) |
 | [Chat - Advanced Data Sources](#chat-with-advanced-data-sources) | [src/ChatDataSources/](src/ChatDataSources/) |
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
 | [Captcha Control](#captcha-control) | [src/CaptchaControl/](src/CaptchaControl/) |
