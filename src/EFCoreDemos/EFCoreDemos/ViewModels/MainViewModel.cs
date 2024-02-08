@@ -15,26 +15,40 @@ public class MainViewModel : ViewModelBase
     {
         dbContext = dbService;
 
-        // 1. Setup on-demand
         DataGridStudents = new LoadOnDemandCollection<StudentEntity>((token) => GetNextPage());
-
-        // 2. Load first batch to get started.
-        var firstPage = GetNextPage();
-
-        DataGridStudents.AddRange(firstPage);
     }
 
     public LoadOnDemandCollection<StudentEntity> DataGridStudents { get; set; }
 
     private IEnumerable<StudentEntity> GetNextPage()
     {
-        var nextPageOfData = dbContext.Students.Skip(itemsPerPage * pageToGet).Take(itemsPerPage);
+        IEnumerable<StudentEntity> nextPageOfData;
 
-        pageToGet++;
+        try
+        {
+            // Get next page of data using the offset and count
+            nextPageOfData = dbContext.Students.Skip(itemsPerPage * pageToGet).Take(itemsPerPage);
 
-        // WARNING - Make sure you are not trying to fetch pages that don't exist (out of range/bounds exception).
-        // Once you reach the end of the data, just return an empty result and automatic load on demand will turn off.
+            pageToGet++;
+        }
+        catch
+        {
+            // Return an empty list to stop loading
+            nextPageOfData = new List<StudentEntity>();
+        }
+        
         return nextPageOfData;
+    }
+
+    public async Task OnAppearing()
+    {
+        await dbContext.InitializeDatabaseAsync();
+
+        if (!dbContext.Students.Any())
+            await GenerateSampleRows();
+
+        // Load first batch to get started.
+        DataGridStudents.AddRange(GetNextPage());
     }
 
     // Important - If you are making changes to the front-end data, do not forget to update the backend data (i.e. database), too.
@@ -51,4 +65,18 @@ public class MainViewModel : ViewModelBase
     //    // Step 3 - Save the database changes
     //    await dbContext.SaveChangesAsync();
     //}
+
+    private async Task GenerateSampleRows()
+    {
+        for (var i = 0; i < 2000; i++)
+        {
+            dbContext.Students.Add(new StudentEntity
+            {
+                FullName = $"StudentEntity {i+1}",
+                Grade = i % 2 == 0 ? 11 : 12
+            });
+        }
+
+        await dbContext.SaveChangesAsync();
+    }
 }

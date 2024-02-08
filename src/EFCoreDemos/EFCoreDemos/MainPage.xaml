@@ -9,7 +9,9 @@
                               ItemsSource="{Binding DataGridStudents}"
                               AutoGenerateColumns="False"
                               LoadOnDemandMode="Automatic"
-                              LoadOnDemandBufferItemsCount="10">
+                              LoadOnDemandBufferItemsCount="10"
+                              UserFilterMode="Enabled"
+                              UserSortMode="Single">
             <dataGrid:RadDataGrid.Columns>
                 <dataGrid:DataGridTextColumn PropertyName="FullName"
                                              HeaderText="Name" />

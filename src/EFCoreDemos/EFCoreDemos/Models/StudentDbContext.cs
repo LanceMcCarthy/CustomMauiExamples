@@ -14,7 +14,7 @@ public class StudentDbContext : DbContext
 
     public DbSet<StudentEntity> Students { get; set; }
 
-    // Important: this is called in app.xaml.cs. It's used to make sure the database exists and to add sample data for the cdemo
+    // Important: this is called in app.xaml.cs. It's used to make sure the database exists and to add sample data for the demo
     public async Task InitializeDatabaseAsync()
     {
         await this.Database.EnsureCreatedAsync();
