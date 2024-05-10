@@ -16,9 +16,11 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
-| [Custom Controls](#lantz-controls) => `ColumnChooser`, `LabeledCheckBox`, `FloatingLabel` | [src/LantzControls](src/LantzControls) |
+| [Custom Controls](#lantz-controls) (`ColumnChooser`, `LabeledCheckBox`, `FloatingLabel`, `PartialRating`) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
+
+## PartialRating
 
 ## EFCore Demos
 
@@ -154,7 +156,8 @@ This is project that has various custom controls and will evolve over time as I 
 
 -  `FloatingLabel`
 -  `LabeledCheckBox`
--  `ColumnChooser` 
+-  `ColumnChooser`
+-  `PartialRating`
 
 ### FloatingLabel
 
@@ -193,6 +196,24 @@ Can be attached to any `RadDataGrid` to allow the app user to show/hide any colu
                             Margin="20"
                             Grid.Column="1" />
 </Grid>
+```
+
+### PartialRating
+
+A rating control that can render fractional values.
+
+![PartialRating](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/04d97e30-c3f7-4d2e-9a76-0197bcd9a8bc)
+
+```xaml
+<input:PartialRating x:Name="RottenTomatoesRating"/>
+```
+```csharp
+private void Button_OnClicked(object sender, EventArgs e)
+{
+    var rating = Random.Shared.Next(0,5) + Random.Shared.NextDouble();
+
+    RottenTomatoesRating.SetRating(rating);
+}
 ```
 
 ## FlyoutPage Navigation
