@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LantzControls.Views.LabeledCheckBoxDemoPage"
-             xmlns:primitives="clr-namespace:LantzControls.Primitives"
+             xmlns:input="clr-namespace:LantzControls.Input"
              Title="LabeledCheckBoxDemoPage">
     <Grid>
-        <primitives:LabeledCheckBox Text="Tap This Text"
+        <input:LabeledCheckBox Text="Tap This Text"
                                     IsChecked="True"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>

@@ -49,18 +49,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommonHelpers" Version="1.1.2" />
-	  <PackageReference Include="Telerik.UI.for.Maui" Version="6.6" />
+	  <PackageReference Include="CommonHelpers" Version="1.3.0" />
+	  <PackageReference Include="Telerik.UI.for.Maui" Version="6.8.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-		<PackageReference Include="WinUIEx" Version="1.8.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Primitives\LabeledCheckBox.xaml.cs">
-	    <DependentUpon>LabeledCheckBox.xaml</DependentUpon>
-	  </Compile>
+		<PackageReference Include="WinUIEx" Version="2.3.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,30 +64,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Data\DataGrid\ColumnChooser.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Primitives\LabeledCheckBox.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Data\SelectAllComboBox.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DataGridColumnChooserDemoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LabeledCheckBoxDemoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SelectAllComboBoxDemoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.21" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Views\SelectAllComboBoxDemoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </None>
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
 	</ItemGroup>
-
 </Project>

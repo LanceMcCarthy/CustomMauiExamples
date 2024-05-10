@@ -1,4 +1,4 @@
-namespace LantzControls.Primitives;
+namespace LantzControls.Input;
 
 public partial class LabeledCheckBox : ContentView
 {
