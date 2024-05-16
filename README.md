@@ -16,7 +16,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [Multi-Window TabView](#multi-window-tabview) | [src/MultiWindowDemo/](src/MultiWindowDemo/) |
 | [DependencyInjection with TabView](#TabViewItems-with-dependency-injection) | [src/DepndInjtnDemo](src/DepndInjtnDemo) |
 | [gRPC Demo](#grpc-demo) | [src/RealtimeDataSystem](src/RealtimeDataSystem) |
-| [Custom Controls](#lantz-controls) (`ColumnChooser`, `LabeledCheckBox`, `FloatingLabel`, `PartialRating`) | [src/LantzControls](src/LantzControls) |
+| [Custom Controls](#lantz-controls) (`ColumnChooser`, `LabeledCheckBox`, `FloatingLabel`, `PartialRating`, `SegmentView`) | [src/LantzControls](src/LantzControls) |
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
@@ -158,6 +158,7 @@ This is project that has various custom controls and will evolve over time as I 
 -  `LabeledCheckBox`
 -  `ColumnChooser`
 -  `PartialRating`
+-  `SegmentView`
 
 ### FloatingLabel
 
@@ -204,6 +205,13 @@ A rating control that can render fractional values.
 
 ![PartialRating](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/04d97e30-c3f7-4d2e-9a76-0197bcd9a8bc)
 
+#### Source:
+
+- [PartialRating.xaml](https://github.com/LanceMcCarthy/CustomMauiExamples/blob/main/src/LantzControls/Input/PartialRating.xaml)
+- [PartialRating.xaml.cs](https://github.com/LanceMcCarthy/CustomMauiExamples/blob/main/src/LantzControls/Input/PartialRating.xaml.cs)
+
+#### Example
+
 ```xaml
 <input:PartialRating x:Name="RottenTomatoesRating"/>
 ```
@@ -214,6 +222,36 @@ private void Button_OnClicked(object sender, EventArgs e)
 
     RottenTomatoesRating.SetRating(rating);
 }
+```
+
+### SegmentView
+
+![SegmentView](https://github.com/LanceMcCarthy/CustomMauiExamples/assets/3520532/f5fa1ed4-f22d-4193-8385-51faf7560ca8)
+
+#### Source:
+
+- [SegmentView.xaml](https://github.com/LanceMcCarthy/CustomMauiExamples/blob/main/src/LantzControls/Input/SegmentView.xaml)
+- [SegmentView.xaml.cs](https://github.com/LanceMcCarthy/CustomMauiExamples/blob/main/src/LantzControls/Input/SegmentView.xaml.cs)
+
+#### Example
+
+```xaml
+<input:SegmentView x:Name="MySegmentView"
+                   SelectedSegmentTextColor="#036ecb"
+                   SelectedSegmentBackgroundColor="#e0edf8"
+                   BackgroundColor="White"
+                   BorderColor="#e1e1e1"
+                   CornerRadius="4"
+                   FontSize="12"
+                   HeightRequest="30"
+                   Margin="5" />
+```
+```csharp
+MySegmentView.ItemsSource = [
+    new SegmentItem() { Text = "Breakfast", ImageSource = ImageSource.FromFile("breakfast.png") },
+    new SegmentItem() { Text = "Lunch", ImageSource = ImageSource.FromFile("lunch.png") },
+    new SegmentItem() { Text = "Dinner", ImageSource = ImageSource.FromFile("dinner.png") }
+];
 ```
 
 ## FlyoutPage Navigation
