@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LantzControls.Views.InputControlsDemoPage"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:input="clr-namespace:LantzControls.Input"
+             Title="FloatingLabelDemoPage">
+    <Grid RowDefinitions="*,*,*,*"
+          RowSpacing="10"
+          Padding="5">
+
+        <!-- SegmentView Demo -->
+
+        <input:SegmentView x:Name="MySegmentView"
+                           SelectedItemChanged="ButtonSegments_OnSelectedItemChanged"
+                           SelectedSegmentTextColor="#036ecb"
+                           SelectedSegmentBackgroundColor="#e0edf8"
+                           BackgroundColor="White"
+                           BorderColor="#e1e1e1"
+                           CornerRadius="4"
+                           FontSize="12"
+                           HeightRequest="30"
+                           Margin="5" />
+
+        <!-- FloatingLabel Demo -->
+
+        <input:FloatingLabel CornerRadius="10"
+                             Text="Product Code"
+                             FontSize="8"
+                             TextColor="#0000fa"
+                             WidthRequest="150"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Start"
+                             Grid.Row="1">
+            <input:FloatingLabel.InnerContent>
+                <telerik:RadEntry x:Name="MyRadEntry"
+                                  Placeholder="Product Code"
+                                  PlaceholderColor="#a8aba8"
+                                  FontSize="12"
+                                  HeightRequest="35"
+                                  CornerRadius="8"
+                                  BorderThickness="2"
+                                  BorderBrush="#a8aba8"
+                                  FocusedBorderThickness="0"
+                                  FocusedBorderBrush="Transparent"
+                                  HorizontalOptions="Fill" />
+            </input:FloatingLabel.InnerContent>
+        </input:FloatingLabel>
+
+        <!-- LabeledCheckBox Demo -->
+
+        <input:LabeledCheckBox Text="Tap This Text"
+                               IsChecked="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               Grid.Row="2" />
+
+
+        <!-- PartialRating Demo -->
+
+        <VerticalStackLayout VerticalOptions="Center"
+                             Padding="10"
+                             Spacing="5"
+                             Grid.Row="3">
+            <Label Text="Rotten Tomatoes: 'Top Gun 15 - In Spaaaaace'" />
+
+            <input:PartialRating x:Name="RottenTomatoesRating" />
+
+            <Button Text="Update Rating (random)"
+                    Clicked="PartialRatingButton_OnClicked" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

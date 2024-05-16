@@ -1,6 +1,6 @@
 using Telerik.Maui.Controls;
 
-namespace LantzControls.Primitives;
+namespace LantzControls.Input;
 
 public partial class FloatingLabel : ContentView
 {

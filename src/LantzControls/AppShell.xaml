@@ -6,21 +6,13 @@
        Shell.FlyoutBehavior="Flyout"
        Shell.NavBarIsVisible="True">
 
-    <ShellContent Title="PartialRating Demo"
-                  ContentTemplate="{DataTemplate views:PartialRatingDemoPage}"
-                  Route="PartialRatingDemoPage" />
-
-    <ShellContent Title="FloatingLabel Demo"
-                  ContentTemplate="{DataTemplate views:FloatingLabelDemoPage}"
+    <ShellContent Title="Input Controls"
+                  ContentTemplate="{DataTemplate views:InputControlsDemoPage}"
                   Route="FloatingLabelDemoPage" />
 
     <ShellContent Title="DataGrid ColumnChooser Demo"
                   ContentTemplate="{DataTemplate views:DataGridColumnChooserDemoPage}"
                   Route="DataGridColumnChooserDemoPage" />
-
-    <ShellContent Title="LabeledCheckBox Demo"
-                  ContentTemplate="{DataTemplate views:LabeledCheckBoxDemoPage}"
-                  Route="LabeledCheckBoxDemoPage" />
 
     <ShellContent Title="AsyncTemplateCell Demo"
                   ContentTemplate="{DataTemplate views:AsyncTemplateCellDemoPage}"

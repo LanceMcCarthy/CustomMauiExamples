@@ -1,7 +1,7 @@
 using CommonHelpers.Common;
 using System.Collections.ObjectModel;
 using Telerik.Maui.Controls;
-using Telerik.Maui.Controls.Compatibility.DataGrid;
+using Telerik.Maui.Controls.DataGrid;
 
 namespace LantzControls.Data.DataGrid;
 
@@ -32,7 +32,6 @@ public partial class ColumnChooser : ContentView
             }
         }
     }
-
 
     public static readonly BindableProperty AssociatedDataGridProperty = BindableProperty.Create(
         nameof(AssociatedDataGrid),
