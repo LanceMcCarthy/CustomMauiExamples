@@ -1,5 +1,6 @@
 ﻿using EFCoreDemos.Models;
 using EFCoreDemos.ViewModels;
+using EFCoreDemos.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Telerik.Maui.Controls.Compatibility;
@@ -30,7 +31,10 @@ namespace EFCoreDemos
 
 
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<SortingPage>();
+
+            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<SortingPageViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

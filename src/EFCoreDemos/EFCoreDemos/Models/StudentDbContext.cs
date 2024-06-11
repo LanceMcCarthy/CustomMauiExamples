@@ -2,15 +2,9 @@
 
 namespace EFCoreDemos.Models;
 
-public class StudentDbContext : DbContext
+public class StudentDbContext(DbContextOptions<StudentDbContext> options) : DbContext(options)
 {
-    private readonly string dbPath;
-
-    public StudentDbContext(DbContextOptions<StudentDbContext> options)
-        : base(options)
-    {
-        dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "student.db");
-    }
+    private readonly string dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "student.db");
 
     public DbSet<StudentEntity> Students { get; set; }
 

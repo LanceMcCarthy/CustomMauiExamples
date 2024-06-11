@@ -1,4 +1,6 @@
-﻿namespace EFCoreDemos
+﻿using EFCoreDemos.Views;
+
+namespace EFCoreDemos
 {
     public partial class App : Application
     {

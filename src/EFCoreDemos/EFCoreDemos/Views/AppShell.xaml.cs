@@ -1,4 +1,4 @@
-﻿namespace EFCoreDemos
+﻿namespace EFCoreDemos.Views
 {
     public partial class AppShell : Shell
     {

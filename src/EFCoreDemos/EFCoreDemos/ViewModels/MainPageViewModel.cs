@@ -1,17 +1,17 @@
 ﻿using CommonHelpers.Common;
 using CommonHelpers.Extensions;
 using EFCoreDemos.Models;
-using Telerik.Maui.Controls.Compatibility.Common;
+using Telerik.Maui;
 
 namespace EFCoreDemos.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class MainPageViewModel : ViewModelBase
 {
     private readonly StudentDbContext dbContext;
     private readonly int itemsPerPage = 50;
     private int pageToGet = 0;
 
-    public MainViewModel(StudentDbContext dbService)
+    public MainPageViewModel(StudentDbContext dbService)
     {
         dbContext = dbService;
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EFCoreDemos.Views.SortingPage"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             Title="SortingPage">
+    <Grid>
+        <telerik:RadDataGrid x:Name="dataGrid"
+                             ItemsSource="{Binding DataGridStudents}"
+                             SortDescriptors="{Binding StudentSortDescriptors, Mode=OneWayToSource}"
+                             AutoGenerateColumns="False"
+                             LoadOnDemandMode="Automatic"
+                             LoadOnDemandBufferItemsCount="10"
+                             UserFilterMode="Enabled"
+                             UserSortMode="Single">
+            <telerik:RadDataGrid.Columns>
+                <telerik:DataGridTextColumn PropertyName="FullName"
+                                            HeaderText="Name" />
+                <telerik:DataGridNumericalColumn PropertyName="Grade"
+                                                 HeaderText="Grade" />
+            </telerik:RadDataGrid.Columns>
+        </telerik:RadDataGrid>
+    </Grid>
+</ContentPage>

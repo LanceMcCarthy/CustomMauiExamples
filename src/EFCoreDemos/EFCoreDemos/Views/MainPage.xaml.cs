@@ -1,15 +1,15 @@
 ﻿using EFCoreDemos.ViewModels;
 
-namespace EFCoreDemos;
+namespace EFCoreDemos.Views;
 
 public partial class MainPage : ContentPage
 {
-    private MainViewModel vm;
+    private readonly MainPageViewModel vm;
 
-    public MainPage(MainViewModel viewModel)
+    public MainPage(MainPageViewModel pageViewModel)
     {
         InitializeComponent();
-        BindingContext = vm = viewModel;
+        BindingContext = vm = pageViewModel;
     }
 
     protected override async void OnAppearing()
