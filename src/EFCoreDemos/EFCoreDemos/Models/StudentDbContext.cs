@@ -8,12 +8,28 @@ public class StudentDbContext(DbContextOptions<StudentDbContext> options) : DbCo
 
     public DbSet<StudentEntity> Students { get; set; }
 
-    // Important: this is called in app.xaml.cs. It's used to make sure the database exists and to add sample data for the demo
+    // Important: this is called in AppShell.xaml.cs to ensure DB exists and has seed data.
     public async Task InitializeDatabaseAsync()
     {
         await this.Database.EnsureCreatedAsync();
+
+        if (!this.Students.Any())
+        {
+            var rand = new Random();
+
+            for (var i = 0; i < 2000; i++)
+            {
+                this.Students.Add(new StudentEntity
+                {
+                    FullName = $"StudentEntity {i + 1}",
+                    Grade = rand.Next(1, 13)
+                });
+            }
+        }
+
+        await this.SaveChangesAsync();
     }
-    
+
     // create a Sqlite database file in the local app data folder for your platform.
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite($"Data Source={dbPath}");
