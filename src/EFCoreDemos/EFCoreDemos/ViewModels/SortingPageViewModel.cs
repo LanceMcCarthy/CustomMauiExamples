@@ -1,9 +1,9 @@
 ﻿using CommonHelpers.Common;
 using CommonHelpers.Extensions;
 using EFCoreDemos.Models;
-using EFCoreDemos.Models.Tools;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using EFCoreDemos.Models.Tools;
 using Telerik.Maui;
 using Telerik.Maui.Controls.Data;
 
@@ -14,7 +14,7 @@ public class SortingPageViewModel : ViewModelBase
     private ObservableCollection<SortDescriptorBase> studentSortDescriptors = new();
     private readonly StudentDbContext dbContext;
     private readonly int itemsPerPage = 50;
-    private int pageToGet = 0;
+    private int pageToGet;
 
     public SortingPageViewModel(StudentDbContext dbService)
     {
@@ -51,45 +51,19 @@ public class SortingPageViewModel : ViewModelBase
     private void UpdateDataAfterSortChange()
     {
         if(pageToGet==0) return;
+
+        DataGridStudents.AddRange(GetNextPage());
     }
 
-    private List<StudentEntity> GetNextPage()
+    private IEnumerable<StudentEntity> GetNextPage()
     {
-        IEnumerable<StudentEntity> nextPageOfData;
-
         try
         {
             IQueryable<StudentEntity> query = dbContext.Students.AsQueryable();
 
             // **** Phase 1 *** //
             // Check to see if there are any sort descriptors applied
-            foreach (var descriptor in StudentSortDescriptors)
-            {
-                // If there is a PropertySortDescriptor, add that to the query
-                if (descriptor is PropertySortDescriptor pDescriptor)
-                {
-                    var prop = typeof(StudentEntity).GetProperty(pDescriptor.PropertyName);
-
-                    query = descriptor.SortOrder == SortOrder.Descending 
-                        ? query.OrderByDescending(student => prop.GetValue(student, null))
-                        : query.OrderBy(student => prop.GetValue(student, null));
-                }
-
-                // If there is a DelegateSortDescriptor, add it to the query
-                if (descriptor is DelegateSortDescriptor dDescriptor)
-                {
-                    query = descriptor.SortOrder == SortOrder.Descending 
-                        ? query.OrderByDescending(x => dDescriptor.KeyLookup.GetKey(x))
-                        : query.OrderBy(x => dDescriptor.KeyLookup.GetKey(x));
-                }
-
-
-                // Finally, pass along the IComparer using a class that converts between different IComparer types
-                query = descriptor.SortOrder == SortOrder.Descending 
-                    ? query.OrderDescending(new AdaptorComparer<StudentEntity>(descriptor.Comparer))
-                    : query.Order(new AdaptorComparer<StudentEntity>(descriptor.Comparer));
-                
-            }
+            HandleSortQueries(ref query);
 
             // **** Phase 2 *** //
             // Handle Skip and Take
@@ -102,63 +76,54 @@ public class SortingPageViewModel : ViewModelBase
 
 
             // **** Phase 3 *** //
-            // Execute the query and return the results
-
-            // Invoking ToList() forces LINQ to combine the expression and get results now.
-            nextPageOfData = query.ToList();
+            // Execute the query by invoking ToList()
+            var nextPageOfData = query.ToList();
 
             pageToGet++;
+
+            return nextPageOfData;
         }
         catch
         {
             // Return an empty list to stop loading
-            nextPageOfData = new List<StudentEntity>();
+            return new List<StudentEntity>();
         }
-        
-        return nextPageOfData.ToList();
     }
 
-    public async Task OnAppearing()
+    private void HandleSortQueries(ref IQueryable<StudentEntity> query)
     {
-        await dbContext.InitializeDatabaseAsync();
+        foreach (var descriptor in StudentSortDescriptors)
+        {
+            // If there is a PropertySortDescriptor, add that to the query
+            if (descriptor is PropertySortDescriptor pDescriptor)
+            {
+                var prop = typeof(StudentEntity).GetProperty(pDescriptor.PropertyName);
 
-        if (!dbContext.Students.Any())
-            await GenerateSampleRows();
+                query = descriptor.SortOrder == SortOrder.Descending 
+                    ? query.OrderByDescending(student => prop!.GetValue(student, null))
+                    : query.OrderBy(student => prop!.GetValue(student, null));
+            }
 
+            // If there is a DelegateSortDescriptor, add it to the query
+            if (descriptor is DelegateSortDescriptor dDescriptor)
+            {
+                query = descriptor.SortOrder == SortOrder.Descending 
+                    ? query.OrderByDescending(x => dDescriptor.KeyLookup.GetKey(x))
+                    : query.OrderBy(x => dDescriptor.KeyLookup.GetKey(x));
+            }
+
+            // Finally, pass along the IComparer using a class that converts between different IComparer types
+            query = descriptor.SortOrder == SortOrder.Descending 
+                ? query.OrderDescending(new AdaptorComparer<StudentEntity>(descriptor.Comparer))
+                : query.Order(new AdaptorComparer<StudentEntity>(descriptor.Comparer));
+        }
+    }
+
+    public Task OnAppearing()
+    {
         // Load first batch to get started.
         DataGridStudents.AddRange(GetNextPage());
+
+        return Task.CompletedTask;
     }
-
-    private async Task GenerateSampleRows()
-    {
-        for (var i = 0; i < 2000; i++)
-        {
-            dbContext.Students.Add(new StudentEntity
-            {
-                FullName = $"StudentEntity {i+1}",
-                Grade = i % 2 == 0 ? 11 : 12
-            });
-        }
-
-        await dbContext.SaveChangesAsync();
-    }
-
-
-    
-    // ***** EDITING CONSIDERATION ***** //
-    // Important - If you are making changes to the front-end data, do not forget to update the backend data (i.e. database), too.
-    // For example, adding a new Student:
-    // public async Task AddNewStudentAsync(StudentEntity student)
-    // {
-    //     (FRONT END DATA)
-    //    // Step 1 - add it to the UI  (FRONT END DATA)
-    //    DataGridStudents.Add(student);
-    //
-    //     (BACK END DATA !!!)
-    //    // Step 2 - Add it to the database
-    //    dbContext.Students.Add(student);
-    //
-    //    // Step 3 - Save the database changes
-    //    await dbContext.SaveChangesAsync();
-    // }
 }

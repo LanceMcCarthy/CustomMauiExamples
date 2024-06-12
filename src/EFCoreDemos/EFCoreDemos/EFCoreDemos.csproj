@@ -71,6 +71,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\FilteringPage.xaml.cs">
+	    <DependentUpon>FilteringPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\FilteringPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\SortingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

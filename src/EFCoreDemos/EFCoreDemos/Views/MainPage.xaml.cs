@@ -4,18 +4,9 @@ namespace EFCoreDemos.Views;
 
 public partial class MainPage : ContentPage
 {
-    private readonly MainPageViewModel vm;
-
-    public MainPage(MainPageViewModel pageViewModel)
+    public MainPage(MainPageViewModel vm)
     {
         InitializeComponent();
-        BindingContext = vm = pageViewModel;
-    }
-
-    protected override async void OnAppearing()
-    {
-        await vm.OnAppearing();
-
-        base.OnAppearing();
+        BindingContext = vm;
     }
 }

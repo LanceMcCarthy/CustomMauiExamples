@@ -5,17 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:EFCoreDemos"
     xmlns:views="clr-namespace:EFCoreDemos.Views"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutIsPresented="True"
     Title="EFCoreDemos">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
+        Title="EFCore Filtering"
+        ContentTemplate="{DataTemplate views:FilteringPage}"
+        Route="FilteringPage" />
 
     <ShellContent
         Title="EFCore Sorting"
         ContentTemplate="{DataTemplate views:SortingPage}"
         Route="SortingPage" />
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
 
 </Shell>

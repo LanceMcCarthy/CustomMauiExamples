@@ -1,14 +1,21 @@
-﻿using EFCoreDemos.Views;
+﻿using EFCoreDemos.Models;
+using EFCoreDemos.Views;
 
-namespace EFCoreDemos
+namespace EFCoreDemos;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            MainPage = new AppShell();
-        }
+        MainPage = new AppShell();
+    }
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+
+        this.Handler?.MauiContext?.Services.GetService<StudentDbContext>()?.InitializeDatabase();
     }
 }
