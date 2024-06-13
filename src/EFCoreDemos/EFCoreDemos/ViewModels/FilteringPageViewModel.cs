@@ -3,9 +3,11 @@ using CommonHelpers.Extensions;
 using EFCoreDemos.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Microsoft.IdentityModel.Tokens;
+using System.Linq.Expressions;
 using Telerik.Maui;
 using Telerik.Maui.Controls.Data;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace EFCoreDemos.ViewModels;
 
@@ -106,82 +108,105 @@ public class FilteringPageViewModel : ViewModelBase
         {
             if (descriptor is PropertyFilterDescriptor propDescriptor)
             {
-                var prop = typeof(StudentEntity).GetProperty(propDescriptor.PropertyName);
-
-                if (prop == null)
-                    return;
-
+                // Thanks to System.Linq.Dynamic.Core
                 switch (descriptor)
                 {
-                    // Bool filter
                     case BooleanFilterDescriptor boolDescriptor:
-                        query = query.Where(s => prop.GetValue(s, null) == boolDescriptor.Value);
+                        query = query.Where($"{propDescriptor.PropertyName} == @0", propDescriptor.Value);
                         break;
-
-                    // Text filter
                     case TextFilterDescriptor textDescriptor:
                         {
-                            // Using a known property does work!!
-                            if (propDescriptor.PropertyName == nameof(StudentEntity.FullName))
+                            switch (textDescriptor.Operator)
                             {
-                                query = textDescriptor.Operator switch
-                                {
-                                    TextOperator.EqualsTo => query.Where(s => s.FullName.Equals(textDescriptor.Value)),
-                                    TextOperator.DoesNotEqualTo => query.Where(s => !s.FullName.Equals(textDescriptor.Value)),
-                                    TextOperator.StartsWith => query.Where(s => s.FullName.StartsWith((string)textDescriptor.Value)),
-                                    TextOperator.EndsWith => query.Where(s => s.FullName.EndsWith((string)textDescriptor.Value)),
-                                    TextOperator.Contains => query.Where(s => s.FullName.Contains((string)textDescriptor.Value)),
-                                    TextOperator.DoesNotContain => query.Where(s => !s.FullName.Contains((string)textDescriptor.Value)),
-                                    TextOperator.IsEmpty => query.Where(s => s.FullName == string.Empty),
-                                    TextOperator.IsNotEmpty => query.Where(s => s.FullName != string.Empty),
-                                    _ => throw new ArgumentOutOfRangeException()
-                                };
+                                case TextOperator.EqualsTo:
+                                    query = query.Where($"{propDescriptor.PropertyName} == @0", propDescriptor.Value);
+                                    break;
+                                case TextOperator.DoesNotEqualTo:
+                                    query = query.Where($"{propDescriptor.PropertyName} != @0", propDescriptor.Value);
+                                    break;
+                                case TextOperator.StartsWith:
+                                    query = query.Where($"{propDescriptor.PropertyName}.StartsWith(@0)", propDescriptor.Value);
+                                    break;
+                                case TextOperator.EndsWith:
+                                    query = query.Where($"{propDescriptor.PropertyName}.EndsWith(@0)", propDescriptor.Value);
+                                    break;
+                                case TextOperator.Contains:
+                                    query = query.Where($"{propDescriptor.PropertyName}.StartsWith(@0)", propDescriptor.Value);
+                                    break;
+                                case TextOperator.DoesNotContain:
+                                    query = query.Where($"{propDescriptor.PropertyName}.Contains(@0) == false", propDescriptor.Value);
+                                    break;
+                                case TextOperator.IsEmpty:
+                                    query = query.Where($"{propDescriptor.PropertyName}.IsNullOrEmpty(@0)", propDescriptor.Value);
+                                    break;
+                                case TextOperator.IsNotEmpty:
+                                    query = query.Where($"{propDescriptor.PropertyName}.IsNullOrEmpty(@0) == false", (string)propDescriptor.Value);
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
                             }
 
-                            // Using reflection to get the property does not work because it's not convertible to SQL
-                            //query = textDescriptor.Operator switch
+                            //if (propDescriptor.PropertyName == nameof(StudentEntity.FullName))
                             //{
-                            //    TextOperator.EqualsTo => query.Where(s => ((string)prop.GetValue(s, null)!).Equals(textDescriptor.Value)),
-                            //    TextOperator.DoesNotEqualTo => query.Where(s => !((string)prop.GetValue(s, null)!).Equals(textDescriptor.Value)),
-                            //    TextOperator.StartsWith => query.Where(s => ((string)prop.GetValue(s, null)!).StartsWith((string)textDescriptor.Value)),
-                            //    TextOperator.EndsWith => query.Where(s => ((string)prop.GetValue(s, null)!).EndsWith((string)textDescriptor.Value)),
-                            //    TextOperator.Contains => query.Where(s => ((string)prop.GetValue(s, null)!).Contains((string)textDescriptor.Value)),
-                            //    TextOperator.DoesNotContain => query.Where(s => !((string)prop.GetValue(s, null)!).Contains((string)textDescriptor.Value)),
-                            //    TextOperator.IsEmpty => query.Where(s => ((string)prop.GetValue(s, null)!).IsNullOrEmpty()),
-                            //    TextOperator.IsNotEmpty => query.Where(s => !((string)prop.GetValue(s, null)!).IsNullOrEmpty()),
-                            //    _ => throw new ArgumentOutOfRangeException()
-                            //};
+                            //    query = textDescriptor.Operator switch
+                            //    {
+                            //        TextOperator.EqualsTo => query.Where(s=>s.Equals((string)propDescriptor.Value)),
+                            //        TextOperator.DoesNotEqualTo => query.Where(s => !s.Equals((string)propDescriptor.Value)),
+                            //        TextOperator.StartsWith => query.Where(s => s.FullName.StartsWith((string)propDescriptor.Value)),
+                            //        TextOperator.EndsWith => query.Where(s => s.FullName.EndsWith((string)propDescriptor.Value)),
+                            //        TextOperator.Contains => query.Where(s => s.FullName.Contains((string)propDescriptor.Value)),
+                            //        TextOperator.DoesNotContain => query.Where(s => !s.FullName.Contains((string)propDescriptor.Value)),
+                            //        TextOperator.IsEmpty => query.Where(s => s.FullName == string.Empty),
+                            //        TextOperator.IsNotEmpty => query.Where(s => s.FullName != string.Empty),
+                            //        _ => throw new ArgumentOutOfRangeException()
+                            //    };
+                            //}
 
                             break;
                         }
 
                     // Number filter
                     case NumericalFilterDescriptor numDescriptor:
+                    {
+                        switch (numDescriptor.Operator)
                         {
-                            query = numDescriptor.Operator switch
-                            {
-                                NumericalOperator.EqualsTo => query.Where(s => s.Grade == Convert.ToInt32(numDescriptor.Value)),
-                                NumericalOperator.DoesNotEqualTo => query.Where(s => s.Grade != Convert.ToInt32(numDescriptor.Value)),
-                                NumericalOperator.IsGreaterThan => query.Where(s => s.Grade > Convert.ToInt32(numDescriptor.Value)),
-                                NumericalOperator.IsGreaterThanOrEqualTo => query.Where(s => s.Grade >= Convert.ToInt32(numDescriptor.Value)),
-                                NumericalOperator.IsLessThan => query.Where(s => s.Grade < Convert.ToInt32(numDescriptor.Value)),
-                                NumericalOperator.IsLessThanOrEqualTo => query.Where(s => s.Grade <= Convert.ToInt32(numDescriptor.Value)),
-                                _ => throw new ArgumentOutOfRangeException()
-                            };
-
-                            // Using reflection to get the property does not work because it's not convertible to SQL
-                            //query = numDescriptor.Operator switch
-                            //{
-                            //    NumericalOperator.EqualsTo => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) == Convert.ToInt32(numDescriptor.Value)),
-                            //    NumericalOperator.DoesNotEqualTo => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) != Convert.ToInt32(numDescriptor.Value)),
-                            //    NumericalOperator.IsGreaterThan => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) > Convert.ToInt32(numDescriptor.Value)),
-                            //    NumericalOperator.IsGreaterThanOrEqualTo => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) >= Convert.ToInt32(numDescriptor.Value)),
-                            //    NumericalOperator.IsLessThan => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) < Convert.ToInt32(numDescriptor.Value)),
-                            //    NumericalOperator.IsLessThanOrEqualTo => query.Where(s => Convert.ToInt32(prop.GetValue(s, null)) <= Convert.ToInt32(numDescriptor.Value)),
-                            //    _ => throw new ArgumentOutOfRangeException()
-                            //};
-                            break;
+                            case NumericalOperator.EqualsTo:
+                                query = query.Where($"{propDescriptor.PropertyName} == @0", propDescriptor.Value);
+                                break;
+                            case NumericalOperator.DoesNotEqualTo:
+                                query = query.Where($"{propDescriptor.PropertyName} != @0", propDescriptor.Value);
+                                break;
+                            case NumericalOperator.IsGreaterThan:
+                                query = query.Where($"{propDescriptor.PropertyName} > @0", propDescriptor.Value);
+                                break;
+                            case NumericalOperator.IsGreaterThanOrEqualTo:
+                                query = query.Where($"{propDescriptor.PropertyName} >= @0", propDescriptor.Value);
+                                break;
+                            case NumericalOperator.IsLessThan:
+                                query = query.Where($"{propDescriptor.PropertyName} < @0", propDescriptor.Value);
+                                break;
+                            case NumericalOperator.IsLessThanOrEqualTo:
+                                query = query.Where($"{propDescriptor.PropertyName} <= @0", propDescriptor.Value);
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
+
+
+                        // Using property name
+                        //query = numDescriptor.Operator switch
+                        //{
+                        //    NumericalOperator.EqualsTo => query.Where(s => s.Grade == Convert.ToInt32(numDescriptor.Value)),
+                        //    NumericalOperator.DoesNotEqualTo => query.Where(s => s.Grade != Convert.ToInt32(numDescriptor.Value)),
+                        //    NumericalOperator.IsGreaterThan => query.Where(s => s.Grade > Convert.ToInt32(numDescriptor.Value)),
+                        //    NumericalOperator.IsGreaterThanOrEqualTo => query.Where(s => s.Grade >= Convert.ToInt32(numDescriptor.Value)),
+                        //    NumericalOperator.IsLessThan => query.Where(s => s.Grade < Convert.ToInt32(numDescriptor.Value)),
+                        //    NumericalOperator.IsLessThanOrEqualTo => query.Where(s => s.Grade <= Convert.ToInt32(numDescriptor.Value)),
+                        //    _ => throw new ArgumentOutOfRangeException()
+                        //};
+
+                        break;
+                    }
                     // IMPLEMENT ANY OTHER DESCRIPTORS YOU NEED
                     default:
                         break;
