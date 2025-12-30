@@ -23,13 +23,15 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 ## Signature Vectorizer
 
-You can extract the SVG point data from  SignaturePad's signature:
+ You can extract the SVG point data from  SignaturePad's signature:
 
-
+<img width="701" height="659" alt="image" src="https://github.com/user-attachments/assets/9551af89-f561-4d8c-89e5-a9a166c068e7" />
 
 Or directly from a loaded png file:
 
+<img width="701" height="659" alt="image" src="https://github.com/user-attachments/assets/988d478e-0825-4c39-8cf4-b7ff94e18950" />
 
+For a full explanation, visit [this in-depth KB article](https://www.telerik.com/maui-ui/documentation/knowledge-base/extracting-point-data-from-signature-signaturepad-dotnet-maui).
 
 ## EFCore Demos
 
