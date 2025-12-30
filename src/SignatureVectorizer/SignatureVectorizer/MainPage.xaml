@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="SignatureVectorizer.MainPage">
+    <Grid RowDefinitions="*,*,*,Auto">
+
+        <telerik:RadSignaturePad x:Name="SigPad1"
+                                 BorderThickness="1"
+                                 BorderColor="LightGray"
+                                 Grid.Row="0" />
+
+        <HorizontalStackLayout Grid.Row="0"
+                               HorizontalOptions="End"
+                               VerticalOptions="End">
+            <telerik:RadButton Text="Process SignPad Signature"
+                               Clicked="SaveButton_OnClicked" />
+            <telerik:RadButton Text="Clear"
+                               Clicked="ClearButton_OnClicked" />
+        </HorizontalStackLayout>
+
+
+        <Image x:Name="SignatureImage"
+               Grid.Row="1" />
+
+        <HorizontalStackLayout Grid.Row="1"
+                               HorizontalOptions="End"
+                               VerticalOptions="End">
+            <telerik:RadButton Text="Use External Image"
+                               Clicked="LoadButton_OnClicked" />
+
+            <telerik:RadButton Text="Clear"
+                               Clicked="ClearButton_OnClicked" />
+        </HorizontalStackLayout>
+
+        <Label x:Name="OutputLabel"
+               Grid.Row="2" />
+    </Grid>
+</ContentPage>

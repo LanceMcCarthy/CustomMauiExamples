@@ -4,6 +4,7 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 
 | Demo | Code |
 |------|------|
+| [Signature Vectorizer](#signature-vectorizer) | [src/SignatureVectorizer/](src/SignatureVectorizer) |
 | [DataGrid - EFCore Demos and LoadOnDemand](#efcore-demos) | [src/EFCoreDemos/](src/EFCoreDemos) |
 | [Chat - Advanced Data Sources](#chat-with-advanced-data-sources) | [src/ChatDataSources/](src/ChatDataSources/) |
 | [TabView Header Notification Badge](#signature-editor) | [src/TabHeaderNotification/](src/TabHeaderNotification/) |
@@ -20,7 +21,15 @@ This is an evolution of my frequently-referenced [Custom Xamarin Demos repo](htt
 | [FlyoutPage Navigation](#flyoutpage-navigation) | [src/FlyoutExample](src/FlyoutExample) |
 | [Blazor Hybrid With Telerik XAML](#blazor-hybrid-with-telerik-xaml) | [src/BlazorHybridWithTelerikXaml](src/BlazorHybridWithTelerikXaml) |
 
-## PartialRating
+## Signature Vectorizer
+
+You can extract the SVG point data from  SignaturePad's signature:
+
+
+
+Or directly from a loaded png file:
+
+
 
 ## EFCore Demos
 
